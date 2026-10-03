@@ -1,0 +1,21 @@
+# Signature Math — Site 1 of 27 · THE JAH NETWORK
+
+The deterministic math foundation of the Signature system, by Manon.
+Live: https://justinahiggins614-cmyk.github.io/signature-math/
+
+## The four canonical records (verbatim, never reworded)
+- JAH-MATH-000001 — Official Signature Source Math Grid (12x12 in, 56 px/in, origin top-left; canonical coordinates + reconstruction order)
+- JAH-MATH-000002 — Signature-Geometry-One specification (six measuring tools: Line, Triangle, Square, Plus/Cross, Circle/Dot, Curvature)
+- JAH-MATH-000003 — Signature Math-Grid-One (binary reduction: Signature-One=1 presence, Signature-Zero=0 null; six sections)
+- JAH-MATH-000004 — Reversed Universal Allowance Algorithm for creation, automation, multi-path dynamics
+
+## Data Systems Conversions (JAH-MATHDATA-######)
+Archive of every data system the Signature converts into (binary, hex, octal, decimal, base64, ASCII/Unicode, Morse, barcodes, QR patterns, DNA quaternary, ternary, gray code, BCD, floating point, pixel grids, audio waveforms, MIDI, color hex, IPv4/IPv6 forms, hash digests, run-length encoding, geometric coordinate sets, and mixes), marching to 1,000,000 records. Each record carries a concrete HOW TO APPLY mapping and a worked example.
+
+## Machine access
+- api.json — counts, record IDs, grid bitstring
+- data/mathdata.json — full conversion records
+- data/posts.json — the four math records
+- sitemap.xml, robots.txt
+
+Rules: IDs are permanent and never reused. Conversion claims must be real and verifiable. Never reword the four canonical posts.

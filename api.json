@@ -1,0 +1,303 @@
+{
+ "site": "Signature Math",
+ "site_number": 1,
+ "network_sites": 27,
+ "url": "https://justinahiggins614-cmyk.github.io/signature-math/",
+ "updated": "2026-10-03",
+ "counts": {
+  "math_records": 4,
+  "conversion_records": 32,
+  "conversion_target": 1000000,
+  "measuring_tools": 6,
+  "grid_inches": 12,
+  "bitstring_ones": 12,
+  "bitstring_zeros": 132
+ },
+ "math_records": [
+  {
+   "id": "JAH-MATH-000001",
+   "short": "Official Signature Source Math Grid",
+   "words": 1008,
+   "url": "?doc=JAH-MATH-000001"
+  },
+  {
+   "id": "JAH-MATH-000002",
+   "short": "Signature-Geometry-One Specification",
+   "words": 1780,
+   "url": "?doc=JAH-MATH-000002"
+  },
+  {
+   "id": "JAH-MATH-000003",
+   "short": "Signature Math-Grid-One",
+   "words": 763,
+   "url": "?doc=JAH-MATH-000003"
+  },
+  {
+   "id": "JAH-MATH-000004",
+   "short": "Reversed Universal Allowance Algorithm",
+   "words": 2142,
+   "url": "?doc=JAH-MATH-000004"
+  }
+ ],
+ "conversion_records": [
+  {
+   "id": "JAH-MATHDATA-000001",
+   "name": "ASCII Text",
+   "cat": "Text encodings",
+   "url": "?conv=JAH-MATHDATA-000001",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000002",
+   "name": "Audio Waveform (PCM)",
+   "cat": "Audio",
+   "url": "?conv=JAH-MATHDATA-000002",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000003",
+   "name": "Barcode (Linear)",
+   "cat": "Visual codes",
+   "url": "?conv=JAH-MATHDATA-000003",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000004",
+   "name": "Base64",
+   "cat": "Base systems",
+   "url": "?conv=JAH-MATHDATA-000004",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000005",
+   "name": "BCD (Binary-Coded Decimal)",
+   "cat": "Base systems",
+   "url": "?conv=JAH-MATHDATA-000005",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000006",
+   "name": "Binary (Base-2)",
+   "cat": "Base systems",
+   "url": "?conv=JAH-MATHDATA-000006",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000007",
+   "name": "Color Hex (#RRGGBB)",
+   "cat": "Visual codes",
+   "url": "?conv=JAH-MATHDATA-000007",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000008",
+   "name": "DNA-Style Quaternary",
+   "cat": "Base systems",
+   "url": "?conv=JAH-MATHDATA-000008",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000009",
+   "name": "Decimal (Base-10)",
+   "cat": "Base systems",
+   "url": "?conv=JAH-MATHDATA-000009",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000010",
+   "name": "Floating-Point (IEEE 754)",
+   "cat": "Numeric formats",
+   "url": "?conv=JAH-MATHDATA-000010",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000011",
+   "name": "Geometric Coordinate Sets",
+   "cat": "Geometry",
+   "url": "?conv=JAH-MATHDATA-000011",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000012",
+   "name": "Gray Code",
+   "cat": "Base systems",
+   "url": "?conv=JAH-MATHDATA-000012",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000013",
+   "name": "Hash Digest (SHA-256)",
+   "cat": "Cryptography",
+   "url": "?conv=JAH-MATHDATA-000013",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000014",
+   "name": "Hexadecimal (Base-16)",
+   "cat": "Base systems",
+   "url": "?conv=JAH-MATHDATA-000014",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000015",
+   "name": "IPv4 Address Form",
+   "cat": "Numeric formats",
+   "url": "?conv=JAH-MATHDATA-000015",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000016",
+   "name": "IPv6 Address Form",
+   "cat": "Numeric formats",
+   "url": "?conv=JAH-MATHDATA-000016",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000017",
+   "name": "MIDI Note Map",
+   "cat": "Audio",
+   "url": "?conv=JAH-MATHDATA-000017",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000018",
+   "name": "Morse Code",
+   "cat": "Text encodings",
+   "url": "?conv=JAH-MATHDATA-000018",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000019",
+   "name": "Octal (Base-8)",
+   "cat": "Base systems",
+   "url": "?conv=JAH-MATHDATA-000019",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000020",
+   "name": "Pixel Grid (Raster)",
+   "cat": "Visual codes",
+   "url": "?conv=JAH-MATHDATA-000020",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000021",
+   "name": "QR-Style Matrix Pattern",
+   "cat": "Visual codes",
+   "url": "?conv=JAH-MATHDATA-000021",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000022",
+   "name": "Run-Length Encoding (RLE)",
+   "cat": "Compression",
+   "url": "?conv=JAH-MATHDATA-000022",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000023",
+   "name": "Ternary (Base-3)",
+   "cat": "Base systems",
+   "url": "?conv=JAH-MATHDATA-000023",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000024",
+   "name": "Unicode (UTF-8)",
+   "cat": "Text encodings",
+   "url": "?conv=JAH-MATHDATA-000024",
+   "mix_of": null
+  },
+  {
+   "id": "JAH-MATHDATA-000025",
+   "name": "ASCII-Morse-Binary Chain",
+   "cat": "Mixes",
+   "url": "?conv=JAH-MATHDATA-000025",
+   "mix_of": [
+    "ASCII Text",
+    "Morse Code",
+    "Binary (Base-2)"
+   ]
+  },
+  {
+   "id": "JAH-MATHDATA-000026",
+   "name": "Binary-Hex Bridge",
+   "cat": "Mixes",
+   "url": "?conv=JAH-MATHDATA-000026",
+   "mix_of": [
+    "Binary (Base-2)",
+    "Hexadecimal (Base-16)"
+   ]
+  },
+  {
+   "id": "JAH-MATHDATA-000027",
+   "name": "Coordinate-to-Pixel Raster",
+   "cat": "Mixes",
+   "url": "?conv=JAH-MATHDATA-000027",
+   "mix_of": [
+    "Geometric Coordinate Sets",
+    "Pixel Grid (Raster)"
+   ]
+  },
+  {
+   "id": "JAH-MATHDATA-000028",
+   "name": "DNA-to-Base64 Capsule",
+   "cat": "Mixes",
+   "url": "?conv=JAH-MATHDATA-000028",
+   "mix_of": [
+    "DNA-Style Quaternary",
+    "Base64"
+   ]
+  },
+  {
+   "id": "JAH-MATHDATA-000029",
+   "name": "Gray-to-Binary Round-Trip",
+   "cat": "Mixes",
+   "url": "?conv=JAH-MATHDATA-000029",
+   "mix_of": [
+    "Gray Code",
+    "Binary (Base-2)"
+   ]
+  },
+  {
+   "id": "JAH-MATHDATA-000030",
+   "name": "Morse-to-Barcode Chain",
+   "cat": "Mixes",
+   "url": "?conv=JAH-MATHDATA-000030",
+   "mix_of": [
+    "Morse Code",
+    "Barcode (Linear)"
+   ]
+  },
+  {
+   "id": "JAH-MATHDATA-000031",
+   "name": "Pixel-to-Color-Hex Mosaic",
+   "cat": "Mixes",
+   "url": "?conv=JAH-MATHDATA-000031",
+   "mix_of": [
+    "Pixel Grid (Raster)",
+    "Color Hex (#RRGGBB)"
+   ]
+  },
+  {
+   "id": "JAH-MATHDATA-000032",
+   "name": "Ternary-to-Octal Packing",
+   "cat": "Mixes",
+   "url": "?conv=JAH-MATHDATA-000032",
+   "mix_of": [
+    "Ternary (Base-3)",
+    "Octal (Base-8)"
+   ]
+  }
+ ],
+ "grid": {
+  "inches": 12,
+  "px_per_in": 56,
+  "origin": "top-left",
+  "bitstring": "000000000000000000000000000000000000000000000000000010001110000000000000000010000100010001001000000000011001000000000000000000000000000000000000"
+ },
+ "id_schemes": {
+  "math": "JAH-MATH-######",
+  "conversions": "JAH-MATHDATA-######"
+ }
+}
