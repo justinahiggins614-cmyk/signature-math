@@ -70,10 +70,10 @@
   "name": "BCD (Binary-Coded Decimal)",
   "cat": "Base systems",
   "system": "In BCD each decimal digit 0-9 is stored as its own 4-bit nibble (e.g. 9 = 1001). Used in calculators and seven-segment displays.",
-  "mapping": "Encode each decimal digit of the Signature's canonical measurements separately: apex (3.20, 5.80) becomes digits 3,2,0,5,8,0 -> six nibbles. Digit-exact, no binary rounding.",
+  "mapping": "Encode each decimal digit of the Signature's canonical measurements separately: apex (4.12, 4.92) becomes digits 4,1,2,4,9,2 -> six nibbles. Digit-exact, no binary rounding.",
   "apply": [
-   "1. Write the measurement in decimal, e.g. segment length 2.69.",
-   "2. Convert each digit (2,6,9) to a 4-bit nibble: 0010 0110 1001.",
+   "1. Write the measurement in decimal, e.g. segment length 1.37.",
+   "2. Convert each digit (1,3,7) to a 4-bit nibble: 0001 0011 0111.",
    "3. Join with spaces. Reverse by reading each nibble as one digit."
   ],
   "ex_in": "decimal 42",
@@ -137,7 +137,7 @@
   "name": "Decimal (Base-10)",
   "cat": "Base systems",
   "system": "Base-10, digits 0-9: the everyday human number system. The Signature's canonical coordinates are already decimal inches.",
-  "mapping": "Signature coordinates are natively decimal (e.g. apex (3.20, 5.80), dot (4.35, 4.80)). Any Signature bitstring also converts to decimal for human readout: value = sum of bit*2^position.",
+  "mapping": "Signature coordinates are natively decimal (e.g. apex (4.12, 4.92), dot (3.73, 5.10)). Any Signature bitstring also converts to decimal for human readout: value = sum of bit*2^position.",
   "apply": [
    "1. For coordinates: read them as-is \u2014 they are decimal inches on the 12x12 grid.",
    "2. For a bitstring: number the bits from the right starting at position 0.",
@@ -154,15 +154,15 @@
   "name": "Floating-Point (IEEE 754)",
   "cat": "Numeric formats",
   "system": "IEEE-754 single precision stores a real number in 32 bits: 1 sign bit, 8 exponent bits, 23 mantissa bits. The standard for scientific computing.",
-  "mapping": "Encode Signature measurements (lengths, angles, coordinates) as 32-bit floats for numeric interchange: e.g. the Segment 1 line length 2.69 in becomes its exact 32-bit pattern, reproducible on any machine.",
+  "mapping": "Encode Signature measurements (lengths, angles, coordinates) as 32-bit floats for numeric interchange: e.g. the Segment 1 line length 1.37 in becomes its exact 32-bit pattern, reproducible on any machine.",
   "apply": [
-   "1. Take a Signature measurement in decimal, e.g. 2.69.",
+   "1. Take a Signature measurement in decimal, e.g. 1.37.",
    "2. Convert to IEEE-754 single: sign 0 (positive), exponent and mantissa per the standard.",
-   "3. Record the 32-bit pattern and hex. Any IEEE-754 decoder returns 2.69.",
+   "3. Record the 32-bit pattern and hex. Any IEEE-754 decoder returns 1.37.",
    "4. Use double (64-bit) when more precision is needed and say which you used."
   ],
-  "ex_in": "2.69 as IEEE-754 single",
-  "ex_out": "bits 01000000001011000010100011110110 (0x402C28F6)",
+  "ex_in": "1.37 as IEEE-754 single",
+  "ex_out": "bits 00111111101011110101110000101001 (0x3FAF5C29)",
   "mix_of": null,
   "id": "JAH-MATHDATA-000010",
   "letter": "F"
@@ -174,12 +174,12 @@
   "mapping": "This is the source form from Document 1: segment starts, apexes, ends, dot centers, all in inches on the 12x12 grid with origin top-left. Every other conversion on this page derives from these coordinates.",
   "apply": [
    "1. Copy the canonical coordinates from Document 1 (reconstruction order).",
-   "2. Store as JSON: {\"segment1_arc\": {\"start\": [1.00, 8.50], \"apex\": [3.20, 5.80]}, ...}.",
+   "2. Store as JSON: {\"segment1_arc\": {\"start\": [1.35, 7.73], \"apex\": [4.12, 4.92]}, ...}.",
    "3. Keep 2 decimal places (the documented precision).",
    "4. Any renderer plots these points to redraw the Signature deterministically."
   ],
   "ex_in": "Segment 1 arc",
-  "ex_out": "{\"start\": [1.00, 8.50], \"apex\": [3.20, 5.80]}",
+  "ex_out": "{\"start\": [1.35, 7.73], \"apex\": [4.12, 4.92]}",
   "mix_of": null,
   "id": "JAH-MATHDATA-000011",
   "letter": "G"
@@ -280,8 +280,8 @@
    "3. Send as MIDI Note-On (0x90), note, velocity 100; Note-Off after one beat.",
    "4. The three dots play the Signature's dot-motif."
   ],
-  "ex_in": "dots at y = 4.80, 4.20, 4.20",
-  "ex_out": "MIDI notes = 69, 71, 71 (A4, B4, B4)",
+  "ex_in": "dots at y = 5.10, 4.49, 4.33",
+  "ex_out": "MIDI notes = 67, 70, 71 (G4, A#4, B4)",
   "mix_of": null,
   "id": "JAH-MATHDATA-000017",
   "letter": "M"
@@ -457,8 +457,8 @@
    "3. Write 1/0 per cell -> the pixel-grid bitstring.",
    "4. Compare against the binary record's string: they must agree."
   ],
-  "ex_in": "Segment 1 arc start (1.00, 8.50)",
-  "ex_out": "lights the pixel cell covering x[1,2), y[8,9)",
+  "ex_in": "Segment 1 arc start (1.35, 7.73)",
+  "ex_out": "lights the pixel cell covering x[1,2), y[7,8)",
   "mix_of": [
    "Geometric Coordinate Sets",
    "Pixel Grid (Raster)"
