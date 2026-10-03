@@ -1322,7 +1322,7 @@ $("bintoggle").onclick=function(){var on=this.getAttribute("aria-pressed")==="tr
  if(d){var el=document.getElementById(d);if(el)setTimeout(function(){el.scrollIntoView({block:"start"})},400)}
  if(c){var det=document.querySelector('details.az');var el2=document.getElementById(c);
   if(el2){var dd=el2.closest("details");if(dd)dd.open=true;
-   setTimeout(function(){el2.scrollIntoView({block:"center"})},400)}})();
+   setTimeout(function(){el2.scrollIntoView({block:"center"})},400)}}})();
 </script>
 <script>(function(){try{var b=$("jahThemeBtn");function paint(){b.textContent=document.documentElement.dataset.theme==="dark"?"◑":"◐"}
 b.onclick=function(){var d=document.documentElement;if(d.dataset.theme==="dark"){d.dataset.theme="";try{localStorage.removeItem("jah-theme")}catch(e){}}else{d.dataset.theme="dark";try{localStorage.setItem("jah-theme","dark")}catch(e){}}paint()};paint()}catch(e){}})();</script>
