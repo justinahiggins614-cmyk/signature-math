@@ -45,7 +45,19 @@ main{max-width:1080px;margin:0 auto;padding:16px}
 section.block{margin:26px 0}
 .gridwrap{display:grid;grid-template-columns:1fr;gap:16px}
 @media(min-width:860px){.gridwrap{grid-template-columns:520px 1fr}}
-#mathgrid{width:100%;height:auto;border:1px solid var(--line);border-radius:8px}
+#mathgrid{width:100%;height:auto;border:1px solid var(--line);border-radius:8px;touch-action:pan-x pan-y}
+.gridwrap{touch-action:pan-x pan-y}
+#sitetoc{position:sticky;top:0;z-index:40;background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:16px 0}
+#sitetoc .tocrow{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;font-size:13px}
+#sitetoc a{white-space:nowrap}
+#youarehere2{font-size:12px;color:var(--gold);letter-spacing:1px;margin-top:4px}
+#cellreadout{font-family:ui-monospace,monospace;font-size:13px;color:#9fe6a0;margin-top:8px}
+.cellhl{fill:rgba(255,211,77,.5)!important}
+#searchpanel,#convcountline{margin:8px 0;font-size:14px}
+.resultlinks{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.askans-src{margin:6px 0;font-size:14px}
+.apicount-note{font-size:12px;color:var(--dim)}
+.kitbtn[disabled]{opacity:.6;cursor:wait}
 .bitstring{font-family:ui-monospace,monospace;font-size:11px;word-break:break-all;background:#05070f;border:1px solid var(--line);border-radius:8px;padding:10px;color:#9fe6a0}
 .post-article,.conv-card{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--card);margin:18px 0}
 .recid{font-size:12px;color:var(--gold);letter-spacing:1px;margin-bottom:8px}
@@ -90,7 +102,7 @@ footer{border-top:1px solid var(--line);padding:20px 16px;color:var(--dim);font-
 <header class="top logolockup">
   <img class="offlogo" src="assets/logo.jpg" alt="Official Signature Math logo: Manon's rainbow Signature mark on the black 12 by 12 math grid" width="132" height="133">
   <div>
-    <h1 class="brand">SIGNATURE MATH<small>THE DETERMINISTIC MATH FOUNDATION · SITE 1 OF 27 · THE JAH NETWORK</small></h1>
+    <h1 class="brand">SIGNATURE MATH<small> — THE DETERMINISTIC MATH FOUNDATION · SITE 1 OF 27 · THE JAH NETWORK</small></h1>
     <p class="offcap"><span class="offpill">OFFICIAL LOGO</span> The Signature mark, exactly as drawn — the company logo. The interactive grid graphics further down this page are math demonstrations, not the logo.</p>
   </div>
 </header>
@@ -125,11 +137,12 @@ footer{border-top:1px solid var(--line);padding:20px 16px;color:var(--dim);font-
 <main id="main">
   <div class="hero">
     <h2>The math everything Signature is built on</h2>
-    <p>Four canonical records — the 12&Prime;&times;12&Prime; Source Math Grid, Signature-Geometry-One, the Math-Grid-One binary reduction, and the Reversed Universal Allowance Algorithm — plus the <b>Data Systems Conversions</b> archive: every data system the Signature converts into, marching to 1,000,000 records.</p>
+    <p><span data-api-count="math_records">4</span> canonical records — the 12&Prime;&times;12&Prime; Source Math Grid, Signature-Geometry-One, the Math-Grid-One binary reduction, and the Reversed Universal Allowance Algorithm — plus the <b>Data Systems Conversions</b> archive: every data system the Signature converts into, marching to 1,000,000 records.</p>
     <div class="searchrow" role="search" aria-label="Search the math records">
       <input id="q" type="search" placeholder="Search records — try &lsquo;binary&rsquo;, &lsquo;triangle&rsquo;, &lsquo;Morse&rsquo;…" aria-label="Search the math records">
       <button class="btn" id="qgo">Search</button>
     </div>
+    <div id="searchpanel" aria-live="polite"></div>
     <div class="askbox" aria-label="Ask about the math">
       <label for="aq"><b>Ask about the math</b> — answered only from the four canonical records:</label>
       <div class="searchrow"><input id="aq" type="text" placeholder="e.g. What are the six measuring tools?"><button class="btn" id="aqgo">Ask</button></div>
@@ -137,10 +150,25 @@ footer{border-top:1px solid var(--line);padding:20px 16px;color:var(--dim);font-
     </div>
   </div>
 
+  <nav id="sitetoc" aria-label="Page sections">
+    <div class="tocrow">
+      <b>ON THIS PAGE:</b>
+      <a href="#gridh">Source Grid</a>
+      <a href="#JAH-MATH-000002">Geometry</a>
+      <a href="#JAH-MATH-000003">Math-Grid-One</a>
+      <a href="#JAH-MATH-000004">Allowance Algorithm</a>
+      <a href="#convh">Data Conversions</a>
+      <a href="#q">Search</a>
+      <a href="#aq">Ask</a>
+      <a href="#dkh">Downloads</a>
+    </div>
+    <div id="youarehere2" aria-live="polite">You are here: top of page</div>
+  </nav>
+
   <section class="block" aria-labelledby="gridh">
     <h2 id="gridh">The 12&Prime; &times; 12&Prime; Signature Source Math Grid — interactive</h2>
     <div class="gridwrap">
-      <div><svg viewBox="0 0 480 480" role="img" aria-label="Interactive 12 by 12 Signature math grid with the canonical mark plotted" id="mathgrid">
+      <div><svg viewBox="0 0 480 480" role="img" aria-label="Interactive 12 by 12 Signature math grid with the canonical mark plotted. Focus it and use the arrow keys to explore cells." id="mathgrid" tabindex="0" aria-describedby="cellreadout">
 <rect x="0" y="0" width="480" height="480" fill="#0b1020"/>
 <line x1="0" y1="0" x2="0" y2="480" style="stroke:#2a3a5f;stroke-width:1"/>
 <line x1="0" y1="0" x2="480" y2="0" style="stroke:#2a3a5f;stroke-width:1"/>
@@ -214,7 +242,8 @@ footer{border-top:1px solid var(--line);padding:20px 16px;color:var(--dim);font-
 <circle cx="344.0" cy="168.0" r="3.5999999999999996" fill="#ff9ecf"/>
 <circle cx="376.0" cy="168.0" r="3.5999999999999996" fill="#ff9ecf"/>
 </svg>
-        <div class="toolbar"><button class="btn" id="bintoggle" aria-pressed="false">Show binary 1/0 overlay</button></div>
+        <div class="toolbar"><button class="btn" id="bintoggle" aria-pressed="false">Show binary 1/0 overlay</button> <button class="btn" id="gridreset">Reset grid</button> <button class="btn" id="gridview">Restore canonical view</button></div>
+        <div id="cellreadout" aria-live="polite">Keyboard: focus the grid (Tab), then move with the arrow keys to explore the 144 cells.</div>
       </div>
       <div>
         <p>Origin (0,0) top-left · 1&Prime; blocks · 56 px/in. The canonical mark is plotted from the Document 1 coordinates. Toggle the overlay to see the <b>Signature-One / Signature-Zero</b> binary reduction: gold cells hold geometry (1), dark cells are null (0).</p>
@@ -759,7 +788,7 @@ Place all three dots last: (4.35, 4.80), (8.60, 4.20), (9.40, 4.20).</span></div
 
   <section class="block" aria-labelledby="convh">
     <h2 id="convh">Data Systems Conversions</h2>
-    <p><b>32 conversion records</b> and marching to 1,000,000. Every record shows exactly how the Signature (the 12&Prime;&times;12&Prime; grid, the binary 1/0 reduction, the six measuring tools) maps onto that data system — with a worked mini-example, locked in, no vagueness.</p>
+    <p><b><span data-api-count="conversion_records">32</span> conversion records</b> and marching to 1,000,000. Every record shows exactly how the Signature (the 12&Prime;&times;12&Prime; grid, the binary 1/0 reduction, the six measuring tools) maps onto that data system — with a worked mini-example, locked in, no vagueness.</p>
     <div class="askbox" aria-label="Ask the conversion archive">
       <label for="cq"><b>Conversion AI helper</b> — grounded in the conversion archive; explains any data system type and how the Signature maps into it:</label>
       <div class="searchrow"><input id="cq" type="text" placeholder="e.g. How does the Signature become Morse code?"><button class="btn" id="cqgo">Ask</button></div>
@@ -768,6 +797,7 @@ Place all three dots last: (4.35, 4.80), (8.60, 4.20), (9.40, 4.20).</span></div
     <div class="searchrow" role="search" aria-label="Search conversions">
       <input id="cq2" type="search" placeholder="Filter conversions — try &lsquo;hex&rsquo;, &lsquo;audio&rsquo;, &lsquo;mix&rsquo;…" aria-label="Filter conversion records">
     </div>
+    <div id="convcountline" aria-live="polite"></div>
     <div id="convlist"><details class="az" id="az-A"><summary><b>A</b> — 3 conversion record(s)</summary>
 <div class="conv-card" id="JAH-MATHDATA-000001" data-id="JAH-MATHDATA-000001" data-search="ASCII Text Text encodings ASCII is the 7-bit American Standard Code for Information Interchange: 128 code points (0-127); printable characters start at 32. One byte per character. Take the Signature bitstring in 7-bit groups; each group is one ASCII code point. The Signature&#x27;s text labels (e.g. &#x27;SIGNATURE-ONE&#x27;) also encode directly to their ASCII bytes, so the mark travels as plain text.">
 <div class="recid">JAH-MATHDATA-000001 · Text encodings</div>
@@ -1087,6 +1117,18 @@ Place all three dots last: (4.35, 4.80), (8.60, 4.20), (9.40, 4.20).</span></div
 <div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000024"><button class="btn" data-say="conv:JAH-MATHDATA-000024">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000024">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000024:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000024:json">⬇ .json</button></div></div>
 </details></div>
   </section>
+
+  <section class="block" aria-labelledby="dkh">
+    <h2 id="dkh">Full data kit — downloads</h2>
+    <p>Every per-record file carries a stable ID, UTF-8 text, a version/date stamp, and a checksum. <span id="kitstatus" class="apicount-note">Checking api.json…</span></p>
+    <div class="toolbar" role="toolbar" aria-label="Full data kit downloads">
+      <button class="btn kitbtn" data-kit="api.json">⬇ api.json (counts)</button>
+      <button class="btn kitbtn" data-kit="data/posts.json">⬇ posts.json (4 records)</button>
+      <button class="btn kitbtn" data-kit="data/mathdata.json">⬇ mathdata.json (32 conversions)</button>
+      <button class="btn kitbtn" data-kit="data/signature-bitstring.json">⬇ signature-bitstring.json</button>
+    </div>
+    <div id="kitmsg" class="apicount-note" aria-live="polite"></div>
+  </section>
 </main>
 <footer>
   <p><b>SIGNATURE MATH</b> · Site 1 of 27 · THE JAH NETWORK · JAH-MATH-000001…000004 · JAH-MATHDATA-000001…<br>
@@ -1121,26 +1163,54 @@ function rdNext(){if(RD.stopped||!RD.queue.length){rdStop();return}
  $("rdprog").textContent="Reading chunk "+(RD.total-RD.queue.length)+" of "+RD.total+"…";
  (function attempt(){if(RD.stopped)return;
   rdTier(chunk,tier,function(ok){if(RD.stopped)return;
-   if(ok){setTimeout(rdNext,250)}else{tier++;if(tier<RD_TIERS.length)attempt();else setTimeout(rdNext,250)}}})})()}
+   if(ok){setTimeout(rdNext,250)}else{tier++;if(tier<RD_TIERS.length)attempt();else setTimeout(rdNext,250)}})})()}
 function sayText(t){if(RD.playing&&!RD.stopped){rdStop();return}
  rdStop();RD.queue=rdChunks(t,400);RD.total=RD.queue.length;if(!RD.queue.length)return;
  RD.stopped=false;$("rdbar").classList.add("show");rdNext()}
+function exportStamp(){return new Date().toISOString().slice(0,10)}
+function djb2(s){var h=5381;for(var i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))>>>0;return("00000000"+h.toString(16)).slice(-8)}
 function recordText(kind,id){
- if(kind==="post"){var el=document.getElementById(id);return el?el.innerText:""}
- if(kind==="conv"){var el=document.getElementById(id);return el?el.innerText:""}
- if(kind==="bitstring"){return $("bitstring").innerText}
- return ""}
+ var body="";
+ if(kind==="post"||kind==="conv"){var el=document.getElementById(id);body=el?el.innerText:""}
+ else if(kind==="bitstring"){body=$("bitstring").innerText}
+ return "SIGNATURE MATH EXPORT\nID: "+id+"\nKind: "+kind+"\nVersion: 1.0\nExported: "+exportStamp()+"\nEncoding: UTF-8\nChecksum (djb2): "+djb2(body)+"\n----\n"+body}
 function recordJSON(kind,id){
- if(kind==="conv"){for(var i=0;i<CONV_FULL.length;i++)if(CONV_FULL[i].id===id)return CONV_FULL[i];return null}
- if(kind==="post"){for(var i=0;i<POSTS_IDX.length;i++)if(POSTS_IDX[i].id===id)return POSTS_IDX[i];return null}
- return null}
+ var o=null;
+ if(kind==="conv"){for(var i=0;i<CONV_FULL.length;i++)if(CONV_FULL[i].id===id)o=CONV_FULL[i]}
+ else if(kind==="post"){for(var j=0;j<POSTS_IDX.length;j++)if(POSTS_IDX[j].id===id)o=POSTS_IDX[j]}
+ var body=JSON.stringify(o||{id:id});
+ return {format:"JAH-SIGNATURE-MATH-RECORD",version:"1.0",exported:exportStamp(),encoding:"UTF-8",checksum_djb2:djb2(body),id:o?o.id:id,record:o}}
 function copyText(t,btn){function done(ok){var o=btn.textContent;btn.textContent=ok?"✓ Copied":"✗ Failed";setTimeout(function(){btn.textContent=o},1500)}
  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true)},function(){done(false)})}
  else{var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done(true)}catch(e){done(false)}document.body.removeChild(ta)}}
 function dlFile(name,content,type){var b=new Blob([content],{type:type||"text/plain"});var u=URL.createObjectURL(b);
  var a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();
  setTimeout(function(){URL.revokeObjectURL(u);a.remove()},500)}
+function kitDownload(url,btn){
+ var msg=$("kitmsg"),orig=btn.textContent;
+ function say(m){if(msg)msg.textContent=m}
+ btn.disabled=true;btn.textContent="Loading…";say("Loading "+url+"…");
+ var done=false,ctl;
+ try{ctl=new AbortController();}catch(x){ctl=null}
+ var to=setTimeout(function(){if(ctl)ctl.abort()},15000);
+ function fail(err){
+  if(done)return;done=true;clearTimeout(to);btn.disabled=false;btn.textContent=orig;
+  say("Failed to load "+url+". ");var r=document.createElement("button");r.className="btn";r.textContent="Retry";
+  r.onclick=function(){if(r.parentNode)r.parentNode.removeChild(r);kitDownload(url,btn)};
+  if(msg)msg.appendChild(r)}
+ fetch(url,ctl?{signal:ctl.signal}:{}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.text()})
+ .then(function(t){
+  if(done)return;done=true;clearTimeout(to);btn.disabled=false;btn.textContent=orig;
+  var name=url.split("/").pop();
+  dlFile(name,t,url.slice(-5)===".json"?"application/json":"text/plain");
+  say("Success: "+name+" saved ("+t.length+" bytes).")})
+ .catch(function(err){fail(err)})}
 document.addEventListener("click",function(e){
+ var am=e.target.closest?e.target.closest("[data-askcopy],[data-asksay]"):null;
+ if(am){var aid=am.getAttribute("data-askcopy")||am.getAttribute("data-asksay"),t=ASKANSWERS[aid]||"";
+  if(am.hasAttribute("data-askcopy")){copyText(t,am)}else{sayText(t)}return}
+ var kb=e.target.closest?e.target.closest("[data-kit]"):null;
+ if(kb){kitDownload(kb.getAttribute("data-kit"),kb);return}
  var b=e.target.closest?e.target.closest("[data-say],[data-copy],[data-dl]"):null;if(!b)return;
  var k=b.getAttribute("data-say")||b.getAttribute("data-copy")||b.getAttribute("data-dl");
  var parts=k.split(":"),kind=parts[0],id=parts[1],fmt=parts[2];
@@ -1151,33 +1221,59 @@ document.addEventListener("click",function(e){
   else dlFile(id+".txt",recordText(kind,id),"text/plain")}
 });
 $("rdstop").onclick=rdStop;
-/* ---------- search ---------- */
+/* ---------- search (results panel) ---------- */
+function clearSearches(){$("q").value="";$("cq2").value="";doSearch("");}
+function convCountLine(html){var el=$("convcountline");if(el)el.innerHTML=html}
+var CONV_TOTAL=document.querySelectorAll(".conv-card").length;
 function doSearch(q){
  q=String(q||"").toLowerCase().trim();
+ var np=0,nc=0,hits=[];
  document.querySelectorAll(".post-article").forEach(function(a){
   var t=(a.getAttribute("data-search")||"").toLowerCase();
-  a.classList.toggle("hide",q&&t.indexOf(q)<0)});
+  var hit=!q||t.indexOf(q)>=0;a.classList.toggle("hide",!hit);
+  if(q&&hit){np++;hits.push({id:a.getAttribute("data-id")||a.id})}});
  document.querySelectorAll("details.az").forEach(function(d){
   var any=false;
   d.querySelectorAll(".conv-card").forEach(function(c){
    var t=(c.getAttribute("data-search")||"").toLowerCase();
-   var hit=!q||t.indexOf(q)>=0;c.classList.toggle("hide",!hit);if(hit)any=true});
-  d.classList.toggle("hide",!any);if(q&&any)d.open=true})}
+   var hit=!q||t.indexOf(q)>=0;c.classList.toggle("hide",!hit);if(hit)any=true;
+   if(q&&hit){nc++;hits.push({id:c.getAttribute("data-id")||c.id})}});
+  d.classList.toggle("hide",!any);if(q&&any)d.open=true});
+ var p=$("searchpanel");
+ if(!q){p.innerHTML="";convCountLine("");return}
+ if(np+nc===0){
+  p.innerHTML="<b>NOT FOUND</b> — no math record or conversion matches &ldquo;"+esc(q)+"&rdquo;. <button class=\"btn\" id=\"qclear\">Clear search</button>";
+  convCountLine("<b>0 of "+CONV_TOTAL+" conversions shown</b> — nothing matches. <button class=\"btn\" id=\"qclear2\">Clear filter</button>");
+ }else{
+  var links=hits.slice(0,14).map(function(h){return '<a href="#'+h.id+'">'+esc(h.id)+"</a>"}).join(" ");
+  p.innerHTML="<b>"+np+" canonical record"+(np===1?"":"s")+", "+nc+" conversion record"+(nc===1?"":"s")+"</b> match &ldquo;"+esc(q)+"&rdquo;:"+
+   '<div class="resultlinks">'+links+"</div> "+
+   '<button class="btn" id="qclear">Clear search</button>';
+  convCountLine("<b>"+nc+" of "+CONV_TOTAL+" conversions shown</b>.");
+ }
+ var qc=$("qclear");if(qc)qc.onclick=clearSearches;
+ var qc2=$("qclear2");if(qc2)qc2.onclick=clearSearches}
 $("qgo").onclick=function(){doSearch($("q").value)};
 $("q").addEventListener("keydown",function(e){if(e.key==="Enter")doSearch($("q").value)});
 $("cq2").addEventListener("input",function(){doSearch($("cq2").value)});
 /* ---------- ask (deterministic, grounded) ---------- */
 var STOP=new Set("the,a,an,and,or,for,to,of,in,on,with,is,it,this,that,what,does,which,how,are,be,was,were,at,by,from,as,so,but,if,not,no,yes,up,out,about,into,over,after,than,then,there,their,them,they,me,my,i,you,your,we,our,do,does,want,need,needs,looking,look,find,finds,get,something,anything,some,any,please,like,just,really,very,would,could,should,can,will,have,has,show,tell,give,kind,thing,things,describe,explain,meaning,mean".split(","));
 function kws(t){return String(t||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(function(w){return w.length>=3&&!STOP.has(w)})}
+var ASKANSWERS={};
 function ask(q,idx,ansEl,linkFn){
  var ks=kws(q),box=$(ansEl);
- if(!ks.length){box.innerHTML="Give me one more word to go on.";return}
+ if(!ks.length){box.innerHTML="<b>Need one more word.</b> Try e.g. &ldquo;What are the six measuring tools?&rdquo;";return}
  var best=null,bs=0;
  idx.forEach(function(r){var hay=(r.name+" "+r.text).toLowerCase(),s=0;
   ks.forEach(function(k){if(hay.indexOf(k)>=0)s+=k.length>4?3:1});if(s>bs){bs=s;best=r}});
- if(!best){box.innerHTML="<b>NOT COVERED</b> by the Signature math records — nothing here matches those words.";return}
- var snip=best.text.slice(0,420);
- box.innerHTML="<b>"+esc(best.name)+"</b> ("+esc(best.id)+") — "+esc(snip)+"…<br>"+linkFn(best)}
+ if(!best){box.innerHTML="<b>NOT FOUND</b> — the Signature math records do not cover those words. Try a shorter question, e.g. &ldquo;six measuring tools&rdquo;, &ldquo;binary&rdquo;, or &ldquo;Morse&rdquo;.";return}
+ var snip=best.text.slice(0,420),aid="ans_"+ansEl;
+ box.innerHTML="<div><b>Your question:</b> "+esc(q)+"</div>"+
+  '<div class="askans-src"><b>Source record:</b> '+esc(best.name)+" ("+esc(best.id)+") — "+linkFn(best)+"</div>"+
+  "<div><b>Answer:</b> "+esc(snip)+"…</div>"+
+  '<div class="toolbar"><button class="btn" data-askcopy="'+aid+'">⧉ Copy answer</button> <button class="btn" data-asksay="'+aid+'">🔊 Read aloud</button></div>';
+ ASKANSWERS[aid]="Question: "+q+"\nSource record: "+best.name+" ("+best.id+")\nAnswer: "+snip+"…";
+}
 $("aqgo").onclick=function(){ask($("aq").value,POSTS_IDX,"aqans",function(r){
  return '<a href="?doc='+r.id+'">Open the record →</a>'})};
 $("aq").addEventListener("keydown",function(e){if(e.key==="Enter")$("aqgo").click()});
@@ -1185,17 +1281,48 @@ var CONV_IDX=CONV_FULL.map(function(r){return{id:r.id,name:r.name,text:r.system+
 $("cqgo").onclick=function(){ask($("cq").value,CONV_IDX,"cqans",function(r){
  return '<a href="?conv='+r.id+'">Open the conversion record →</a>'})};
 $("cq").addEventListener("keydown",function(e){if(e.key==="Enter")$("cqgo").click()});
-/* ---------- grid binary toggle ---------- */
+/* ---------- grid binary toggle, keyboard explorer, reset/restore ---------- */
+function gridReadout(m){var r=$("cellreadout");if(r)r.textContent=m}
 $("bintoggle").onclick=function(){var on=this.getAttribute("aria-pressed")==="true";
  this.setAttribute("aria-pressed",String(!on));this.textContent=on?"Show binary 1/0 overlay":"Hide binary 1/0 overlay";
- document.querySelectorAll(".bincell").forEach(function(c){c.style.display=on?"none":""})};
+ document.querySelectorAll(".bincell").forEach(function(c){c.style.display=on?"none":""});
+ gridReadout(on?"Binary overlay off.":"Binary overlay on: gold cells hold geometry (Signature-One = 1), dark cells are null (Signature-Zero = 0).")};
+(function(){
+ var NS="http://www.w3.org/2000/svg",svg=$("mathgrid");
+ var hl=document.createElementNS(NS,"rect");
+ hl.setAttribute("width","40");hl.setAttribute("height","40");hl.setAttribute("class","cellhl");
+ hl.style.display="none";svg.appendChild(hl);
+ var ones={};document.querySelectorAll(".bincell").forEach(function(c){
+  ones[(+c.getAttribute("x")/40)+","+(+c.getAttribute("y")/40)]=1});
+ var bits=($("bitstring").innerText||"").replace(/\s/g,"");
+ var gx=0,gy=0;
+ function show(){
+  hl.setAttribute("x",gx*40);hl.setAttribute("y",gy*40);hl.style.display="";
+  var b=bits[gy*12+gx]||"?";
+  gridReadout("Cell ("+gx+", "+gy+") — inch block column "+gx+", row "+gy+" — grid bit "+b+(b==="1"?" (Signature-One: geometry present)":b==="0"?" (Signature-Zero: null space)":"")+".")}
+ svg.addEventListener("keydown",function(e){
+  var dx=0,dy=0;
+  if(e.key==="ArrowRight")dx=1;else if(e.key==="ArrowLeft")dx=-1;
+  else if(e.key==="ArrowDown")dy=1;else if(e.key==="ArrowUp")dy=-1;else return;
+  e.preventDefault();
+  gx=Math.min(11,Math.max(0,gx+dx));gy=Math.min(11,Math.max(0,gy+dy));show()});
+ svg.addEventListener("focus",function(){show()});
+ svg.addEventListener("blur",function(){hl.style.display="none"});
+ function resetGrid(){
+  var t=$("bintoggle");t.setAttribute("aria-pressed","false");t.textContent="Show binary 1/0 overlay";
+  document.querySelectorAll(".bincell").forEach(function(c){c.style.display="none"});
+  gx=0;gy=0;hl.style.display="none";
+  gridReadout("Grid reset to the canonical view: overlay off, cell cursor cleared.")}
+ $("gridreset").onclick=function(){resetGrid()};
+ $("gridview").onclick=function(){resetGrid();$("gridh").scrollIntoView({block:"start"})};
+})();
 /* ---------- deep links ---------- */
 (function(){var q=new URLSearchParams(location.search);
  var d=q.get("doc"),c=q.get("conv");
  if(d){var el=document.getElementById(d);if(el)setTimeout(function(){el.scrollIntoView({block:"start"})},400)}
  if(c){var det=document.querySelector('details.az');var el2=document.getElementById(c);
   if(el2){var dd=el2.closest("details");if(dd)dd.open=true;
-   setTimeout(function(){el2.scrollIntoView({block:"center"})},400}}})();
+   setTimeout(function(){el2.scrollIntoView({block:"center"})},400)}})();
 </script>
 <script>(function(){try{var b=$("jahThemeBtn");function paint(){b.textContent=document.documentElement.dataset.theme==="dark"?"◑":"◐"}
 b.onclick=function(){var d=document.documentElement;if(d.dataset.theme==="dark"){d.dataset.theme="";try{localStorage.removeItem("jah-theme")}catch(e){}}else{d.dataset.theme="dark";try{localStorage.setItem("jah-theme","dark")}catch(e){}}paint()};paint()}catch(e){}})();</script>
@@ -1207,5 +1334,46 @@ if(!q.get("doc")&&!q.get("conv")){var sv=null;try{sv=localStorage.getItem(SK)}ca
  if(sv&&+sv>40)requestAnimationFrame(function(){window.scrollTo(0,+sv)})}
 document.addEventListener("click",function(e){var t=e.target&&e.target.closest?e.target.closest("[data-id]"):null;
  if(t)try{localStorage.setItem("jah-last-"+SITE,t.getAttribute("data-id"))}catch(x){}},true)}catch(e){}})();</script>
+<script>/* usability boot: counts from api.json (with timeout+retry), scrollspy "you are here", TOC init */
+(function(){
+ "use strict";
+ function setCount(k,v){document.querySelectorAll('[data-api-count="'+k+'"]').forEach(function(el){el.textContent=v})}
+ function kitStatus(m){var k=document.getElementById("kitstatus");if(k)k.textContent=m}
+ function convLine(){var c=document.querySelectorAll(".conv-card").length;var l=document.getElementById("convcountline");
+  if(l&&!l.textContent)l.innerHTML="<b>"+c+" of "+c+" conversions shown</b>."}
+ var attempt=0;
+ function loadApi(){
+  attempt++;kitStatus("Checking api.json…");
+  var ctl=null;
+  try{ctl=new AbortController()}catch(x){}
+  var to=setTimeout(function(){if(ctl)ctl.abort()},8000);
+  function fail(){
+   clearTimeout(to);
+   kitStatus("Offline copy — counts from the shipped page.");
+   var k=document.getElementById("kitstatus");if(k&&!document.getElementById("apiretry")){
+    var b=document.createElement("button");b.id="apiretry";b.className="btn";b.textContent="Retry";
+    b.style.marginLeft="8px";b.onclick=function(){b.remove();loadApi()};k.appendChild(b)}}
+  try{
+   fetch("api.json",ctl?{signal:ctl.signal}:{}).then(function(r){if(!r.ok)throw 0;return r.json()})
+   .then(function(a){clearTimeout(to);
+    if(a&&a.counts){setCount("math_records",a.counts.math_records);setCount("conversion_records",a.counts.conversion_records)}
+    kitStatus("Counts confirmed from api.json ("+(a&&a.updated?a.updated:"")+")")})
+   .catch(fail);
+  }catch(x){fail()}
+ }
+ /* scrollspy: "You are here" through the long document */
+ var map=[["gridh","Source Grid"],["JAH-MATH-000002","Geometry"],["JAH-MATH-000003","Math-Grid-One"],
+  ["JAH-MATH-000004","Allowance Algorithm"],["convh","Data Conversions"],["dkh","Downloads"]];
+ var els=map.map(function(m){var el=document.getElementById(m[0]);return el?{name:m[1],el:el}:null}).filter(Boolean);
+ var tick=false;
+ function spy(){
+  var y=window.scrollY+140,cur="top of page";
+  for(var i=0;i<els.length;i++){if(els[i].el.getBoundingClientRect().top+window.scrollY<=y)cur=els[i].name}
+  var n=document.getElementById("youarehere2");
+  if(n&&n.textContent!=="You are here: "+cur)n.textContent="You are here: "+cur;
+  tick=false}
+ window.addEventListener("scroll",function(){if(!tick){tick=true;requestAnimationFrame(spy)}},{passive:true});
+ loadApi();convLine();spy();
+})();</script>
 </body>
 </html>
