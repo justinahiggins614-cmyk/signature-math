@@ -94,11 +94,31 @@ details.az[open]>summary:before{content:"▾ "}
 footer{border-top:1px solid var(--line);padding:20px 16px;color:var(--dim);font-size:13px;text-align:center}
 #jahThemeBtn{position:fixed;top:10px;right:10px;z-index:60;background:#1b2650;color:var(--ink);border:1px solid var(--line);border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:18px}
 .hide{display:none!important}
+/* ---------- first-visit tour + how-to guide (usability addition; theme untouched) ---------- */
+#jahGuideBtn{position:fixed;top:10px;right:56px;z-index:60;background:#1b2650;color:var(--ink);border:1px solid var(--line);border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:18px;font-weight:700}
+#jahTourPrompt{position:fixed;left:12px;right:12px;bottom:12px;z-index:70;background:var(--bg2);border:1px solid var(--gold);border-radius:12px;padding:14px 16px;display:none;box-shadow:0 8px 30px rgba(0,0,0,.55);max-width:560px;margin:0 auto}
+#jahTourPrompt.show{display:block}
+#jahTourPrompt .btnrow{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+#jahTourTip{position:fixed;left:12px;right:12px;bottom:12px;z-index:71;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:none;box-shadow:0 8px 30px rgba(0,0,0,.55);max-width:620px;margin:0 auto}
+#jahTourTip.show{display:block}
+#jahTourTip .btnrow{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+#jahTourTip .btn,#jahTourPrompt .btn,#jahGuide .btn{min-height:44px;min-width:44px}
+.jah-tour-hl{outline:3px solid var(--gold)!important;outline-offset:4px;box-shadow:0 0 0 6px rgba(255,211,77,.18);border-radius:6px}
+#jahGuide{position:fixed;inset:0;z-index:72;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(3,6,14,.72)}
+#jahGuide.show{display:flex}
+#jahGuideCard{background:var(--bg2);border:1px solid var(--line);border-radius:14px;max-width:680px;width:100%;max-height:86vh;overflow:auto;padding:20px 22px;color:var(--ink)}
+#jahGuideCard h2{margin-top:0;color:var(--gold)}
+#jahGuideCard .gfeat{margin:0 0 14px;padding:10px 12px;background:var(--card);border:1px solid var(--line);border-radius:10px}
+#jahGuideCard .gfeat b{color:var(--ink)}
+#jahGuideCard .gfeat p{margin:4px 0 0;font-size:14px;line-height:1.5;color:var(--dim)}
+#jahGuideCard .gfeat p b{color:var(--ink)}
+#jahGuideCloseRow{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;align-items:center;justify-content:space-between}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <button id="jahThemeBtn" title="Dark mode" aria-label="Toggle dark mode">◐</button>
+<button id="jahGuideBtn" title="How to use this site" aria-label="Open the how-to guide">?</button>
 <header class="top logolockup">
   <img class="offlogo" src="assets/logo.jpg" alt="Official Signature Math logo: Manon's rainbow Signature mark on the black 12 by 12 math grid" width="132" height="133">
   <div>
@@ -1359,5 +1379,123 @@ document.addEventListener("click",function(e){var t=e.target&&e.target.closest?e
  window.addEventListener("scroll",function(){if(!tick){tick=true;requestAnimationFrame(spy)}},{passive:true});
  loadApi();convLine();spy();
 })();</script>
+<script>(function(){try{
+var FLAG="jah-tour-seen-math";
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+var prompt=document.getElementById("jahTourPrompt"),
+    tip=document.getElementById("jahTourTip"),
+    cap=document.getElementById("jahTourCap"),
+    stepLabel=document.getElementById("jahTourStepLabel"),
+    guide=document.getElementById("jahGuide"),
+    guideCard=document.getElementById("jahGuideCard"),
+    guideBtn=document.getElementById("jahGuideBtn");
+var STEPS=[
+ {t:"q",title:"Search the records",
+  h:"<b>WHAT:</b> the search box at the top of the page.<br><b>DOES:</b> filters the four canonical records and the conversion archive, then shows clickable result links with match counts.<br><b>HOW:</b> type a word like &ldquo;Morse&rdquo; and press Search (Enter works too)."},
+ {t:"aq",title:"Ask about the math",
+  h:"<b>WHAT:</b> the &ldquo;Ask about the math&rdquo; box.<br><b>DOES:</b> answers your question using ONLY the four canonical records, quoting the best match with an &ldquo;Open the record &rarr;&rdquo; link.<br><b>HOW:</b> type a question like &ldquo;What are the six measuring tools?&rdquo; and press Ask."},
+ {t:"mathgrid",title:"The interactive source grid",
+  h:"<b>WHAT:</b> the live 12&times;12 Signature Source Math Grid, with the canonical mark plotted.<br><b>DOES:</b> lets you explore the grid cell by cell — the readout below names each cell&rsquo;s inch-block coordinates and grid bit.<br><b>HOW:</b> click or tap the grid to focus it, then move with the arrow keys."},
+ {t:"bintoggle",title:"The binary 1/0 overlay",
+  h:"<b>WHAT:</b> the toggle button under the grid.<br><b>DOES:</b> writes the 1/0 bit on every cell — gold cells hold geometry (Signature-One = 1), dark cells are null (Signature-Zero = 0).<br><b>HOW:</b> press &ldquo;Show binary 1/0 overlay&rdquo;; copy the full 144-bit string with &ldquo;Copy bitstring&rdquo;."},
+ {t:"convh",title:"Data Systems Conversions",
+  h:"<b>WHAT:</b> the archive of 32 conversion records — every data system the Signature converts into.<br><b>DOES:</b> each card shows the system, how the Signature maps into it, and a &ldquo;HOW TO APPLY&rdquo; step list.<br><b>HOW:</b> open the letter groups to read them, or type into &ldquo;Filter conversions&rdquo; to narrow the list."},
+ {t:"JAH-MATH-000001",title:"Record tools",
+  h:"<b>WHAT:</b> the tool buttons at the top of every record.<br><b>DOES:</b> &ldquo;Read aloud&rdquo; speaks the record, &ldquo;Copy&rdquo; copies its text, &ldquo;.txt&rdquo; and &ldquo;.json&rdquo; download it with a date stamp and checksum.<br><b>HOW:</b> press the buttons on any record you are reading."},
+ {t:"dkh",title:"Full data kit downloads",
+  h:"<b>WHAT:</b> the Downloads section at the bottom of the page.<br><b>DOES:</b> fetches the raw data files — api.json, posts.json, mathdata.json, signature-bitstring.json — with a status line and a Retry button if a fetch fails.<br><b>HOW:</b> press any &ldquo;&darr;&rdquo; button in that section."},
+ {t:"sitetoc",title:"Find your way around",
+  h:"<b>WHAT:</b> the sticky &ldquo;ON THIS PAGE&rdquo; bar, with its live &ldquo;You are here&rdquo; readout.<br><b>DOES:</b> jumps to any section; deep links like <code>?doc=JAH-MATH-000001</code> or <code>?conv=JAH-MATHDATA-000001</code> open a record directly; the &cir; button top-right toggles dark mode.<br><b>HOW:</b> tap a section link, or share a ?doc=/?conv= URL."}
+];
+var idx=-1,lastHl=null;
+function setPrompt(v){prompt.classList.toggle("show",v);prompt.setAttribute("aria-hidden",v?"false":"true")}
+function setTip(v){tip.classList.toggle("show",v);tip.setAttribute("aria-hidden",v?"false":"true")}
+function clearHl(){if(lastHl){lastHl.classList.remove("jah-tour-hl");lastHl=null}}
+function showStep(n){
+  idx=n;clearHl();
+  if(n<0||n>=STEPS.length){endTour();return}
+  var s=STEPS[n],el=document.getElementById(s.t);
+  stepLabel.textContent="STEP "+(n+1)+" OF "+STEPS.length+": "+s.title;
+  cap.innerHTML=s.h;
+  document.getElementById("jahTourNext").textContent=(n===STEPS.length-1)?"Finish ✓":"Next →";
+  document.getElementById("jahTourBack").style.visibility=(n===0)?"hidden":"visible";
+  if(el){el.classList.add("jah-tour-hl");lastHl=el;
+    try{el.scrollIntoView({block:"center",behavior:"smooth"})}catch(e){el.scrollIntoView()}
+    setTimeout(function(){if(document.getElementById("jahTourNext"))document.getElementById("jahTourNext").focus({preventScroll:true})},450)}
+  setTip(true);
+}
+function startTour(){setPrompt(false);showStep(0)}
+function endTour(){clearHl();setTip(false);setPrompt(false);ls(FLAG,"1")}
+document.getElementById("jahTourStart").onclick=startTour;
+document.getElementById("jahTourSkip").onclick=function(){endTour()};
+document.getElementById("jahTourNext").onclick=function(){showStep(idx+1)};
+document.getElementById("jahTourBack").onclick=function(){showStep(idx-1)};
+document.getElementById("jahTourExit").onclick=function(){endTour()};
+document.addEventListener("keydown",function(e){
+  if(tip.classList.contains("show")){
+    if(e.key==="Escape"){endTour();e.preventDefault()}
+    else if(e.key==="ArrowRight"){showStep(idx+1);e.preventDefault()}
+    else if(e.key==="ArrowLeft"){showStep(idx-1);e.preventDefault()}
+  }else if(guide.classList.contains("show")){
+    if(e.key==="Escape"){closeGuide();e.preventDefault()}
+  }
+});
+function openGuide(){guide.classList.add("show");guide.setAttribute("aria-hidden","false");
+  try{guideCard.scrollTop=0;document.getElementById("jahGuideClose").focus({preventScroll:true})}catch(e){}}
+function closeGuide(){guide.classList.remove("show");guide.setAttribute("aria-hidden","true");
+  try{guideBtn.focus({preventScroll:true})}catch(e){}}
+guideBtn.onclick=function(){guide.classList.contains("show")?closeGuide():openGuide()};
+document.getElementById("jahGuideClose").onclick=closeGuide;
+document.getElementById("jahGuideClose2").onclick=closeGuide;
+document.getElementById("jahGuideTour").onclick=function(){closeGuide();ls(FLAG,"1");startTour()};
+guide.addEventListener("click",function(e){if(e.target===guide)closeGuide()});
+if(!ls(FLAG)){setPrompt(true)}
+}catch(e){}})();</script>
+<!-- first-visit tour + permanent how-to guide (usability addition; no theme/text changes) -->
+<div id="jahTourPrompt" role="dialog" aria-label="Take the tour" aria-hidden="true">
+  <b>New here? Take the 1-minute tour</b>
+  <p style="margin:6px 0 0;color:var(--dim);font-size:14px">A short spotlight walk through the search, the interactive grid, the binary overlay, and the record tools.</p>
+  <div class="btnrow">
+    <button class="btn" id="jahTourStart">Start tour</button>
+    <button class="btn" id="jahTourSkip">Skip</button>
+  </div>
+</div>
+<div id="jahTourTip" role="dialog" aria-label="Tour step" aria-hidden="true">
+  <div id="jahTourStepLabel" style="font-size:12px;color:var(--dim)">STEP 1 OF 8</div>
+  <div id="jahTourCap" style="margin-top:6px;font-size:14px;line-height:1.55"></div>
+  <div class="btnrow">
+    <button class="btn" id="jahTourNext">Next →</button>
+    <button class="btn" id="jahTourBack">← Back</button>
+    <button class="btn" id="jahTourExit">Skip tour</button>
+  </div>
+</div>
+<div id="jahGuide" aria-hidden="true">
+  <div id="jahGuideCard" role="dialog" aria-modal="true" aria-label="How to use Signature Math">
+    <div id="jahGuideCloseRow">
+      <h2 style="margin:0">How to use this site</h2>
+      <button class="btn" id="jahGuideClose">✕ Close</button>
+    </div>
+    <div class="gfeat"><b>Search the math records</b><p><b>What:</b> the search box at the top of the page. <b>Does:</b> filters the four canonical records and the conversion archive, then lists result links with counts. <b>How:</b> type a word like &ldquo;binary&rdquo; or &ldquo;Morse&rdquo; and press Search (or Enter); press Clear search to restore the page.</p></div>
+    <div class="gfeat"><b>Ask about the math</b><p><b>What:</b> the &ldquo;Ask about the math&rdquo; box. <b>Does:</b> answers your question only from the four canonical records, quoting the best match with an &ldquo;Open the record &rarr;&rdquo; link. <b>How:</b> type a question like &ldquo;What are the six measuring tools?&rdquo; and press Ask.</p></div>
+    <div class="gfeat"><b>Interactive 12&Prime; &times; 12&Prime; source grid</b><p><b>What:</b> the live SVG grid with the canonical Signature mark plotted. <b>Does:</b> a keyboard explorer for the grid — the readout below tells you each cell&rsquo;s inch-block coordinates and its grid bit. <b>How:</b> click or tap the grid to focus it, then move with the arrow keys.</p></div>
+    <div class="gfeat"><b>Binary 1/0 overlay + 144-bit bitstring</b><p><b>What:</b> the &ldquo;Show binary 1/0 overlay&rdquo; button under the grid. <b>Does:</b> writes the 1/0 bit on every cell — gold cells hold geometry (Signature-One = 1), dark cells are null (Signature-Zero = 0). <b>How:</b> press the button; copy the full 144-bit string with &ldquo;Copy bitstring&rdquo;.</p></div>
+    <div class="gfeat"><b>Reset grid / Restore canonical view</b><p><b>What:</b> the two buttons under the grid. <b>Does:</b> Reset grid clears the overlay and the cell cursor; Restore canonical view also scrolls you back to the grid section. <b>How:</b> press either button at any time.</p></div>
+    <div class="gfeat"><b>The four canonical math records</b><p><b>What:</b> JAH-MATH-000001 to JAH-MATH-000004 — the Source Math Grid, Signature-Geometry-One (with Document 1 coordinates), the Math-Grid-One binary reduction, and the Reversed Universal Allowance Algorithm. <b>Does:</b> the complete deterministic foundation, each fully readable. <b>How:</b> scroll through them, or open one directly with <code>?doc=JAH-MATH-000001</code>.</p></div>
+    <div class="gfeat"><b>Data Systems Conversions archive</b><p><b>What:</b> 32 conversion records (JAH-MATHDATA-000001&ndash;32): every data system the Signature converts into. <b>Does:</b> each card shows the system, how the Signature maps into it, and a &ldquo;HOW TO APPLY&rdquo; step list. <b>How:</b> open the letter groups, or narrow them with &ldquo;Filter conversions&rdquo;.</p></div>
+    <div class="gfeat"><b>Ask the conversion archive</b><p><b>What:</b> the question box above the conversions. <b>Does:</b> answers from the 32 conversion records with an &ldquo;Open the conversion record &rarr;&rdquo; link. <b>How:</b> ask e.g. &ldquo;How does the Signature become Morse code?&rdquo; and press Ask.</p></div>
+    <div class="gfeat"><b>Record tools: read aloud, copy, download</b><p><b>What:</b> the buttons at the top of every record. <b>Does:</b> &ldquo;Read aloud&rdquo; speaks the record, &ldquo;Copy&rdquo; copies its text, &ldquo;.txt&rdquo; and &ldquo;.json&rdquo; download it with a date stamp and checksum. <b>How:</b> press the buttons on any record you are reading.</p></div>
+    <div class="gfeat"><b>Read-aloud bar</b><p><b>What:</b> the bar that appears at the bottom while reading. <b>Does:</b> shows which chunk is being read and rotates through the voice tiers automatically if one fails. <b>How:</b> press &ldquo;Read aloud&rdquo; on any record; press &ldquo;Stop&rdquo; (or the button again) to end it.</p></div>
+    <div class="gfeat"><b>Full data kit — downloads</b><p><b>What:</b> the Downloads section at the bottom. <b>Does:</b> fetches the raw data files — api.json (counts), posts.json (4 records), mathdata.json (32 conversions), signature-bitstring.json — with a status line and Retry if a download fails. <b>How:</b> press any &ldquo;&darr;&rdquo; button.</p></div>
+    <div class="gfeat"><b>Deep links</b><p><b>What:</b> shareable record URLs. <b>Does:</b> <code>?doc=JAH-MATH-000001</code> scrolls to a math record; <code>?conv=JAH-MATHDATA-000001</code> opens the right letter group and scrolls to a conversion. <b>How:</b> paste the URL in the address bar, or share it.</p></div>
+    <div class="gfeat"><b>ON THIS PAGE + &ldquo;You are here&rdquo;</b><p><b>What:</b> the sticky bar under the search. <b>Does:</b> jumps to any section; the &ldquo;You are here&rdquo; line updates as you scroll. <b>How:</b> tap a section link; your last scroll position and last-viewed record are remembered on your device for next time.</p></div>
+    <div class="gfeat"><b>Dark mode</b><p><b>What:</b> the &cir; button at the very top right. <b>Does:</b> switches the page between dark and light. <b>How:</b> press it; your choice is remembered.</p></div>
+    <div class="gfeat"><b>api.json — data endpoints</b><p><b>What:</b> the machine-readable counts file in the Downloads section. <b>Does:</b> publishes the live record counts that the page&rsquo;s counters read. <b>How:</b> download &ldquo;api.json (counts)&rdquo; to inspect it.</p></div>
+    <div class="gfeat"><b>Replay the tour</b><p><b>What:</b> the 1-minute spotlight tour. <b>Does:</b> walks through search, ask, the grid, the binary overlay, conversions, record tools, downloads, and navigation. <b>How:</b> press the button below, or the Skip button on it to dismiss.</p></div>
+    <div class="btnrow" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
+      <button class="btn" id="jahGuideTour">▶ Replay the 1-minute tour</button>
+      <button class="btn" id="jahGuideClose2">✕ Close guide</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
