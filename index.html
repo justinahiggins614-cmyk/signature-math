@@ -94,16 +94,17 @@ details.az[open]>summary:before{content:"▾ "}
 footer{border-top:1px solid var(--line);padding:20px 16px;color:var(--dim);font-size:13px;text-align:center}
 #jahThemeBtn{position:fixed;top:10px;right:10px;z-index:60;background:#1b2650;color:var(--ink);border:1px solid var(--line);border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:18px}
 .hide{display:none!important}
-/* ---------- first-visit tour + how-to guide (usability addition; theme untouched) ---------- */
+/* ---------- first-visit WELCOME overlay (2026-10-04 standard: centered modal, no scroll, no spotlight) ---------- */
+#jahWelcome{position:fixed;inset:0;z-index:80;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(3,6,14,.78)}
+#jahWelcome.show{display:flex}
+#jahWelcomeCard{background:var(--bg2);border:2px solid var(--gold);border-radius:14px;padding:22px 20px;max-width:540px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,.6)}
+#jahWelcomeCard h2{margin:0 0 4px;color:var(--gold);font-size:20px}
+#jahWelcomeCard ol{margin:10px 0 0;padding-left:22px;font-size:14px;line-height:1.55}
+#jahWelcomeCard ol li{margin:8px 0}
+#jahWelcomeCard .wbtnrow{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+#jahGuide .btn,#jahWelcome .btn{min-height:48px;min-width:48px;font-size:16px;padding:12px 22px}
+#jahWelcomeOk{font-weight:700}
 #jahGuideBtn{position:fixed;top:10px;right:56px;z-index:60;background:#1b2650;color:var(--ink);border:1px solid var(--line);border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:18px;font-weight:700}
-#jahTourPrompt{position:fixed;left:12px;right:12px;bottom:12px;z-index:70;background:var(--bg2);border:1px solid var(--gold);border-radius:12px;padding:14px 16px;display:none;box-shadow:0 8px 30px rgba(0,0,0,.55);max-width:560px;margin:0 auto}
-#jahTourPrompt.show{display:block}
-#jahTourPrompt .btnrow{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-#jahTourTip{position:fixed;left:12px;right:12px;bottom:12px;z-index:71;background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:none;box-shadow:0 8px 30px rgba(0,0,0,.55);max-width:620px;margin:0 auto}
-#jahTourTip.show{display:block}
-#jahTourTip .btnrow{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-#jahTourTip .btn,#jahTourPrompt .btn,#jahGuide .btn{min-height:44px;min-width:44px}
-.jah-tour-hl{outline:3px solid var(--gold)!important;outline-offset:4px;box-shadow:0 0 0 6px rgba(255,211,77,.18);border-radius:6px}
 #jahGuide{position:fixed;inset:0;z-index:72;display:none;align-items:center;justify-content:center;padding:16px;background:rgba(3,6,14,.72)}
 #jahGuide.show{display:flex}
 #jahGuideCard{background:var(--bg2);border:1px solid var(--line);border-radius:14px;max-width:680px;width:100%;max-height:86vh;overflow:auto;padding:20px 22px;color:var(--ink)}
@@ -118,7 +119,7 @@ footer{border-top:1px solid var(--line);padding:20px 16px;color:var(--dim);font-
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <button id="jahThemeBtn" title="Dark mode" aria-label="Toggle dark mode">◐</button>
-<button id="jahGuideBtn" title="How to use this site" aria-label="Open the how-to guide">?</button>
+<button id="jahGuideBtn" title="? Guide — show the welcome guide" aria-label="Open the welcome guide">?</button>
 <header class="top logolockup">
   <img class="offlogo" src="assets/logo.jpg" alt="Official Signature Math logo: Manon's rainbow Signature mark on the black 12 by 12 math grid" width="132" height="133">
   <div>
@@ -1382,93 +1383,49 @@ document.addEventListener("click",function(e){var t=e.target&&e.target.closest?e
  loadApi();convLine();spy();
 })();</script>
 <script>(function(){try{
+/* ---------- first-visit WELCOME overlay (2026-10-04 standard): centered modal.
+   NO auto-scroll, NO spotlight, NO section jumps — the page stays put, the overlay teaches. ---------- */
 var FLAG="jah-tour-seen-math";
 function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
-var prompt=document.getElementById("jahTourPrompt"),
-    tip=document.getElementById("jahTourTip"),
-    cap=document.getElementById("jahTourCap"),
-    stepLabel=document.getElementById("jahTourStepLabel"),
+var w=document.getElementById("jahWelcome"),
     guide=document.getElementById("jahGuide"),
     guideCard=document.getElementById("jahGuideCard"),
     guideBtn=document.getElementById("jahGuideBtn");
-var STEPS=[
- {t:"q",title:"Search the records",
-  h:"<b>WHAT:</b> the search box at the top of the page.<br><b>DOES:</b> filters the four canonical records and the conversion archive, then shows clickable result links with match counts.<br><b>HOW:</b> type a word like &ldquo;Morse&rdquo; and press Search (Enter works too)."},
- {t:"aq",title:"Ask about the math",
-  h:"<b>WHAT:</b> the &ldquo;Ask about the math&rdquo; box.<br><b>DOES:</b> answers your question using ONLY the four canonical records, quoting the best match with an &ldquo;Open the record &rarr;&rdquo; link.<br><b>HOW:</b> type a question like &ldquo;What are the six measuring tools?&rdquo; and press Ask."},
- {t:"mathgrid",title:"The interactive source grid",
-  h:"<b>WHAT:</b> the live 12&times;12 Signature Source Math Grid, with the canonical mark plotted.<br><b>DOES:</b> lets you explore the grid cell by cell — the readout below names each cell&rsquo;s inch-block coordinates and grid bit.<br><b>HOW:</b> click or tap the grid to focus it, then move with the arrow keys."},
- {t:"bintoggle",title:"The binary 1/0 overlay",
-  h:"<b>WHAT:</b> the toggle button under the grid.<br><b>DOES:</b> writes the 1/0 bit on every cell — gold cells hold geometry (Signature-One = 1), dark cells are null (Signature-Zero = 0).<br><b>HOW:</b> press &ldquo;Show binary 1/0 overlay&rdquo;; copy the full 144-bit string with &ldquo;Copy bitstring&rdquo;."},
- {t:"convh",title:"Data Systems Conversions",
-  h:"<b>WHAT:</b> the archive of 32 conversion records — every data system the Signature converts into.<br><b>DOES:</b> each card shows the system, how the Signature maps into it, and a &ldquo;HOW TO APPLY&rdquo; step list.<br><b>HOW:</b> open the letter groups to read them, or type into &ldquo;Filter conversions&rdquo; to narrow the list."},
- {t:"JAH-MATH-000001",title:"Record tools",
-  h:"<b>WHAT:</b> the tool buttons at the top of every record.<br><b>DOES:</b> &ldquo;Read aloud&rdquo; speaks the record, &ldquo;Copy&rdquo; copies its text, &ldquo;.txt&rdquo; and &ldquo;.json&rdquo; download it with a date stamp and checksum.<br><b>HOW:</b> press the buttons on any record you are reading."},
- {t:"dkh",title:"Full data kit downloads",
-  h:"<b>WHAT:</b> the Downloads section at the bottom of the page.<br><b>DOES:</b> fetches the raw data files — api.json, posts.json, mathdata.json, signature-bitstring.json — with a status line and a Retry button if a fetch fails.<br><b>HOW:</b> press any &ldquo;&darr;&rdquo; button in that section."},
- {t:"sitetoc",title:"Find your way around",
-  h:"<b>WHAT:</b> the sticky &ldquo;ON THIS PAGE&rdquo; bar, with its live &ldquo;You are here&rdquo; readout.<br><b>DOES:</b> jumps to any section; deep links like <code>?doc=JAH-MATH-000001</code> or <code>?conv=JAH-MATHDATA-000001</code> open a record directly; the &cir; button top-right toggles dark mode.<br><b>HOW:</b> tap a section link, or share a ?doc=/?conv= URL."}
-];
-var idx=-1,lastHl=null;
-function setPrompt(v){prompt.classList.toggle("show",v);prompt.setAttribute("aria-hidden",v?"false":"true")}
-function setTip(v){tip.classList.toggle("show",v);tip.setAttribute("aria-hidden",v?"false":"true")}
-function clearHl(){if(lastHl){lastHl.classList.remove("jah-tour-hl");lastHl=null}}
-function showStep(n){
-  idx=n;clearHl();
-  if(n<0||n>=STEPS.length){endTour();return}
-  var s=STEPS[n],el=document.getElementById(s.t);
-  stepLabel.textContent="STEP "+(n+1)+" OF "+STEPS.length+": "+s.title;
-  cap.innerHTML=s.h;
-  document.getElementById("jahTourNext").textContent=(n===STEPS.length-1)?"Finish ✓":"Next →";
-  document.getElementById("jahTourBack").style.visibility=(n===0)?"hidden":"visible";
-  if(el){el.classList.add("jah-tour-hl");lastHl=el;
-    try{el.scrollIntoView({block:"center",behavior:"smooth"})}catch(e){el.scrollIntoView()}
-    setTimeout(function(){if(document.getElementById("jahTourNext"))document.getElementById("jahTourNext").focus({preventScroll:true})},450)}
-  setTip(true);
-}
-function startTour(){setPrompt(false);showStep(0)}
-function endTour(){clearHl();setTip(false);setPrompt(false);ls(FLAG,"1")}
-document.getElementById("jahTourStart").onclick=startTour;
-document.getElementById("jahTourSkip").onclick=function(){endTour()};
-document.getElementById("jahTourNext").onclick=function(){showStep(idx+1)};
-document.getElementById("jahTourBack").onclick=function(){showStep(idx-1)};
-document.getElementById("jahTourExit").onclick=function(){endTour()};
+function openWelcome(){w.classList.add("show");w.setAttribute("aria-hidden","false");
+  try{document.getElementById("jahWelcomeOk").focus({preventScroll:true})}catch(e){}}
+function closeWelcome(){w.classList.remove("show");w.setAttribute("aria-hidden","true");ls(FLAG,"1")}
+document.getElementById("jahWelcomeOk").onclick=closeWelcome;
+document.getElementById("jahWelcomeFull").onclick=function(){closeWelcome();openGuide()};
+w.addEventListener("click",function(e){if(e.target===w)closeWelcome()});
 document.addEventListener("keydown",function(e){
-  if(tip.classList.contains("show")){
-    if(e.key==="Escape"){endTour();e.preventDefault()}
-    else if(e.key==="ArrowRight"){showStep(idx+1);e.preventDefault()}
-    else if(e.key==="ArrowLeft"){showStep(idx-1);e.preventDefault()}
-  }else if(guide.classList.contains("show")){
-    if(e.key==="Escape"){closeGuide();e.preventDefault()}
-  }
-});
+  if(w.classList.contains("show")&&e.key==="Escape"){closeWelcome();e.preventDefault()}});
 function openGuide(){guide.classList.add("show");guide.setAttribute("aria-hidden","false");
   try{guideCard.scrollTop=0;document.getElementById("jahGuideClose").focus({preventScroll:true})}catch(e){}}
 function closeGuide(){guide.classList.remove("show");guide.setAttribute("aria-hidden","true");
   try{guideBtn.focus({preventScroll:true})}catch(e){}}
-guideBtn.onclick=function(){guide.classList.contains("show")?closeGuide():openGuide()};
+guideBtn.onclick=openWelcome;
 document.getElementById("jahGuideClose").onclick=closeGuide;
 document.getElementById("jahGuideClose2").onclick=closeGuide;
-document.getElementById("jahGuideTour").onclick=function(){closeGuide();ls(FLAG,"1");startTour()};
+document.getElementById("jahGuideTour").onclick=function(){closeGuide();openWelcome()};
 guide.addEventListener("click",function(e){if(e.target===guide)closeGuide()});
-if(!ls(FLAG)){setPrompt(true)}
+if(!ls(FLAG)){setTimeout(openWelcome,900)}
 }catch(e){}})();</script>
-<!-- first-visit tour + permanent how-to guide (usability addition; no theme/text changes) -->
-<div id="jahTourPrompt" role="dialog" aria-label="Take the tour" aria-hidden="true">
-  <b>New here? Take the 1-minute tour</b>
-  <p style="margin:6px 0 0;color:var(--dim);font-size:14px">A short spotlight walk through the search, the interactive grid, the binary overlay, and the record tools.</p>
-  <div class="btnrow">
-    <button class="btn" id="jahTourStart">Start tour</button>
-    <button class="btn" id="jahTourSkip">Skip</button>
-  </div>
-</div>
-<div id="jahTourTip" role="dialog" aria-label="Tour step" aria-hidden="true">
-  <div id="jahTourStepLabel" style="font-size:12px;color:var(--dim)">STEP 1 OF 8</div>
-  <div id="jahTourCap" style="margin-top:6px;font-size:14px;line-height:1.55"></div>
-  <div class="btnrow">
-    <button class="btn" id="jahTourNext">Next →</button>
-    <button class="btn" id="jahTourBack">← Back</button>
-    <button class="btn" id="jahTourExit">Skip tour</button>
+<!-- first-visit WELCOME overlay (2026-10-04 standard: centered modal, no scroll, no spotlight) -->
+<div id="jahWelcome" aria-hidden="true">
+  <div id="jahWelcomeCard" role="dialog" aria-modal="true" aria-label="Welcome to Signature Math">
+    <h2>Welcome to Signature Math</h2>
+    <p style="margin:4px 0 0;color:var(--dim);font-size:14px">The deterministic math foundation of the Signature system. Here&rsquo;s how to use it:</p>
+    <ol>
+      <li><b>Search the records.</b> Type a word in the search box at the top and press Search — it filters the four canonical math records and the conversion archive.</li>
+      <li><b>Ask about the math.</b> Use the &ldquo;Ask about the math&rdquo; box. Answers come only from the four canonical records, with a link to the matching record.</li>
+      <li><b>Explore the 12&times;12 source grid.</b> Tap the grid to focus it, then move with the arrow keys — the readout names each cell&rsquo;s inch-block coordinates and its bit. Try &ldquo;Show binary 1/0 overlay&rdquo; and copy the 144-bit string.</li>
+      <li><b>Read the Data Systems Conversions.</b> 32 records showing how the Signature maps into other data systems — open the letter groups, or narrow them with &ldquo;Filter conversions&rdquo;.</li>
+      <li><b>Use the record tools.</b> Every record has <b>Read aloud</b>, <b>Copy</b>, and <b>.txt / .json download</b> buttons at its top.</li>
+    </ol>
+    <div class="wbtnrow">
+      <button class="btn" id="jahWelcomeOk">OK &mdash; Got it &#10003;</button>
+      <button class="btn" id="jahWelcomeFull">Full how-to guide</button>
+    </div>
   </div>
 </div>
 <div id="jahGuide" aria-hidden="true">
@@ -1492,9 +1449,9 @@ if(!ls(FLAG)){setPrompt(true)}
     <div class="gfeat"><b>ON THIS PAGE + &ldquo;You are here&rdquo;</b><p><b>What:</b> the sticky bar under the search. <b>Does:</b> jumps to any section; the &ldquo;You are here&rdquo; line updates as you scroll. <b>How:</b> tap a section link; your last scroll position and last-viewed record are remembered on your device for next time.</p></div>
     <div class="gfeat"><b>Dark mode</b><p><b>What:</b> the &cir; button at the very top right. <b>Does:</b> switches the page between dark and light. <b>How:</b> press it; your choice is remembered.</p></div>
     <div class="gfeat"><b>api.json — data endpoints</b><p><b>What:</b> the machine-readable counts file in the Downloads section. <b>Does:</b> publishes the live record counts that the page&rsquo;s counters read. <b>How:</b> download &ldquo;api.json (counts)&rdquo; to inspect it.</p></div>
-    <div class="gfeat"><b>Replay the tour</b><p><b>What:</b> the 1-minute spotlight tour. <b>Does:</b> walks through search, ask, the grid, the binary overlay, conversions, record tools, downloads, and navigation. <b>How:</b> press the button below, or the Skip button on it to dismiss.</p></div>
+    <div class="gfeat"><b>Show the welcome guide</b><p><b>What:</b> the short welcome overlay from your first visit. <b>Does:</b> walks through search, ask, the grid, the binary overlay, conversions, and record tools — the page stays put, the overlay teaches. <b>How:</b> press the button below.</p></div>
     <div class="btnrow" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px">
-      <button class="btn" id="jahGuideTour">▶ Replay the 1-minute tour</button>
+      <button class="btn" id="jahGuideTour">▶ Show the welcome guide</button>
       <button class="btn" id="jahGuideClose2">✕ Close guide</button>
     </div>
   </div>
