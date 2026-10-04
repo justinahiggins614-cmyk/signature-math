@@ -127,6 +127,21 @@ footer{border-top:1px solid var(--line);padding:20px 16px;color:var(--dim);font-
     <p class="offcap"><span class="offpill">OFFICIAL LOGO</span> The Signature mark, exactly as drawn — the company logo. The interactive grid graphics further down this page are math demonstrations, not the logo.</p>
   </div>
 </header>
+<!-- JAH TAB BAR — Manon's 2026-10-04 order (calculator screenshot as spec).
+     Paste right after </header> (or after the hero/title block) on index.html AND on the archive page.
+     On index.html: "Front Door" carries class "on". On the archive page: "1 Million Archive" carries "on".
+     Replace  with <a class="jtab" href="...">Label</a> items (may be empty). -->
+<style>
+.jtabbar{display:flex;gap:8px;overflow-x:auto;padding:10px 12px;-webkit-overflow-scrolling:touch;scrollbar-width:thin;border-bottom:1px solid rgba(128,128,128,.25)}
+.jtabbar a.jtab{flex:0 0 auto;text-decoration:none;border:1px solid rgba(160,160,160,.45);border-radius:999px;padding:9px 16px;font-size:.92em;color:inherit;background:rgba(127,127,127,.08);white-space:nowrap;font-family:inherit}
+.jtabbar a.jtab.on{background:#f5c518;border-color:#f5c518;color:#191919;font-weight:700}
+</style>
+<nav class="jtabbar" aria-label="Site sections">
+<a class="jtab on" href="index.html">🏠 Front Door</a>
+<a class="jtab" href="browse.html">📚 1 Million Archive</a>
+
+</nav>
+
 
 <main id="main">
   <div class="hero">
@@ -767,334 +782,13 @@ Place all three dots last: (3.73, 5.10), (8.80, 4.49), (9.40, 4.33).</span></div
 
   <section class="block" aria-labelledby="convh">
     <h2 id="convh">Data Systems Conversions</h2>
-    <p><b><span data-api-count="conversion_records">32</span> conversion records</b> and marching to 1,000,000. Every record shows exactly how the Signature (the 12&Prime;&times;12&Prime; grid, the binary 1/0 reduction, the six measuring tools) maps onto that data system — with a worked mini-example, locked in, no vagueness.</p>
+    <p><b><span data-api-count="conversion_records">32</span> conversion records</b> and marching to 1,000,000. Every record shows exactly how the Signature maps onto that data system — with a worked mini-example, locked in, no vagueness.</p>
+    <p><a class="btn" href="browse.html" style="text-decoration:none;font-weight:700">&#128214; Open the full conversion archive — every record, A&ndash;Z</a></p>
     <div class="askbox" aria-label="Ask the conversion archive">
       <label for="cq"><b>Conversion AI helper</b> — grounded in the conversion archive; explains any data system type and how the Signature maps into it:</label>
       <div class="searchrow"><input id="cq" type="text" placeholder="e.g. How does the Signature become Morse code?"><button class="btn" id="cqgo">Ask</button></div>
       <div class="askans" id="cqans" aria-live="polite"></div>
     </div>
-    <div class="searchrow" role="search" aria-label="Search conversions">
-      <input id="cq2" type="search" placeholder="Filter conversions — try &lsquo;hex&rsquo;, &lsquo;audio&rsquo;, &lsquo;mix&rsquo;…" aria-label="Filter conversion records">
-    </div>
-    <div id="convcountline" aria-live="polite"></div>
-    <div id="convlist"><details class="az" id="az-A"><summary><b>A</b> — 3 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000001" data-id="JAH-MATHDATA-000001" data-search="ASCII Text Text encodings ASCII is the 7-bit American Standard Code for Information Interchange: 128 code points (0-127); printable characters start at 32. One byte per character. Take the Signature bitstring in 7-bit groups; each group is one ASCII code point. The Signature&#x27;s text labels (e.g. &#x27;SIGNATURE-ONE&#x27;) also encode directly to their ASCII bytes, so the mark travels as plain text.">
-<div class="recid">JAH-MATHDATA-000001 · Text encodings</div>
-<h4>ASCII Text</h4>
-<p><b>The data system:</b> ASCII is the 7-bit American Standard Code for Information Interchange: 128 code points (0-127); printable characters start at 32. One byte per character.</p>
-<p><b>How the Signature maps into it:</b> Take the Signature bitstring in 7-bit groups; each group is one ASCII code point. The Signature&#x27;s text labels (e.g. &#x27;SIGNATURE-ONE&#x27;) also encode directly to their ASCII bytes, so the mark travels as plain text.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Reduce the Signature to its 144-bit string on the 12x12 grid (1 = geometry present, 0 = null).</li><li>2. Split the bitstring into 7-bit groups from the left; pad the last group with trailing zeros.</li><li>3. Convert each group to decimal (0-127) and look up the ASCII character.</li><li>4. The resulting character string is the ASCII form of the Signature.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>Character &#x27;J&#x27;</code> → Output: <code>Decimal 74 -&gt; binary 01001010</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000001"><button class="btn" data-say="conv:JAH-MATHDATA-000001">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000001">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000001:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000001:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000002" data-id="JAH-MATHDATA-000002" data-search="Audio Waveform (PCM) Audio PCM (pulse-code modulation) stores sound as a sequence of amplitude samples. Standard CD audio uses 44,100 samples per second at 16-bit depth. Sonify the Signature: read the 144-bit grid string as 144 audio samples (1 = positive amplitude, 0 = negative amplitude). This is the SG1 &#x27;ping&#x27; — the echolocation mapping made audible. A pure reference tone is computed the same way any synth does: sample = round(32767 * sin(2*pi*f*t)).">
-<div class="recid">JAH-MATHDATA-000002 · Audio</div>
-<h4>Audio Waveform (PCM)</h4>
-<p><b>The data system:</b> PCM (pulse-code modulation) stores sound as a sequence of amplitude samples. Standard CD audio uses 44,100 samples per second at 16-bit depth.</p>
-<p><b>How the Signature maps into it:</b> Sonify the Signature: read the 144-bit grid string as 144 audio samples (1 = positive amplitude, 0 = negative amplitude). This is the SG1 &#x27;ping&#x27; — the echolocation mapping made audible. A pure reference tone is computed the same way any synth does: sample = round(32767 * sin(2*pi*f*t)).</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the 144-bit Signature string.</li><li>2. Map each bit to one 16-bit sample: 1 -&gt; +16000, 0 -&gt; -16000.</li><li>3. Write the 144 samples as a .wav file at 8000 Hz (add a 44-byte WAV header).</li><li>4. Play it: you hear the Signature&#x27;s echolocation ping.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>440 Hz sine, 4 samples @ 8000 Hz</code> → Output: <code>samples = [0, 11099, 20886, 28204]</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000002"><button class="btn" data-say="conv:JAH-MATHDATA-000002">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000002">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000002:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000002:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000025" data-id="JAH-MATHDATA-000025" data-search="ASCII-Morse-Binary Chain Mixes A three-stage pipeline: text -&gt; Morse -&gt; raw bits. Each stage is independently reversible. Chain three records: ASCII text to Morse symbols (record: Morse Code), then Morse to bits with 1=dah, 0=dit (record: Binary). The Signature&#x27;s name travels as text, as rhythm, and as bits.">
-<div class="recid">JAH-MATHDATA-000025 · Mixes</div>
-<h4>ASCII-Morse-Binary Chain</h4>
-<p><b>The data system:</b> A three-stage pipeline: text -&gt; Morse -&gt; raw bits. Each stage is independently reversible.</p>
-<p><b>How the Signature maps into it:</b> Chain three records: ASCII text to Morse symbols (record: Morse Code), then Morse to bits with 1=dah, 0=dit (record: Binary). The Signature&#x27;s name travels as text, as rhythm, and as bits.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Write the label, e.g. &#x27;JAH&#x27;.</li><li>2. ASCII+Mor se: convert to Morse -&gt; .--- .- ....</li><li>3. Morse+Binary: map - -&gt; 1, . -&gt; 0 (letter separators dropped, documented).</li><li>4. Reverse the chain to verify the round trip.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>&#x27;JAH&#x27; -&gt; Morse -&gt; bits</code> → Output: <code>.--- .- .... -&gt; 1000 01 0000 (documented mapping)</code></p>
-<p class="mixline"><b>Mix of:</b> ASCII Text, Morse Code, Binary (Base-2)</p>
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000025"><button class="btn" data-say="conv:JAH-MATHDATA-000025">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000025">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000025:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000025:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-B"><summary><b>B</b> — 5 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000003" data-id="JAH-MATHDATA-000003" data-search="Barcode (Linear) Visual codes A linear barcode encodes data as bars and spaces of varying widths scanned left to right. This record uses a demonstration mapping (wide/narrow bars), not a registered symbology. Map each Signature bit to one bar: 1 = wide bar, 0 = narrow bar. One 12-bit grid row becomes a 12-bar strip. This is a visual demonstration of bit-to-bar mapping, honestly labeled — not a scannable retail barcode.">
-<div class="recid">JAH-MATHDATA-000003 · Visual codes</div>
-<h4>Barcode (Linear)</h4>
-<p><b>The data system:</b> A linear barcode encodes data as bars and spaces of varying widths scanned left to right. This record uses a demonstration mapping (wide/narrow bars), not a registered symbology.</p>
-<p><b>How the Signature maps into it:</b> Map each Signature bit to one bar: 1 = wide bar, 0 = narrow bar. One 12-bit grid row becomes a 12-bar strip. This is a visual demonstration of bit-to-bar mapping, honestly labeled — not a scannable retail barcode.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take one 12-bit row of the Signature grid string.</li><li>2. Draw 12 vertical bars left to right: wide for 1, narrow for 0.</li><li>3. Repeat for all 12 rows to make a 12-row bar panel.</li><li>4. Label it &#x27;demonstration mapping — not a registered symbology&#x27;.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>bits 101100</code> → Output: <code>bars: ▮▯▮▮▯▯ (wide,narrow pattern)</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000003"><button class="btn" data-say="conv:JAH-MATHDATA-000003">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000003">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000003:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000003:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000004" data-id="JAH-MATHDATA-000004" data-search="Base64 Base systems Base64 encodes arbitrary binary data as 64 printable ASCII characters (A-Z, a-z, 0-9, +, /), 3 bytes -&gt; 4 characters. Used anywhere binary must travel as text. Pack the 144 Signature bits into 18 bytes, then Base64-encode them. The result is a 24-character text token that carries the entire Signature grid losslessly.">
-<div class="recid">JAH-MATHDATA-000004 · Base systems</div>
-<h4>Base64</h4>
-<p><b>The data system:</b> Base64 encodes arbitrary binary data as 64 printable ASCII characters (A-Z, a-z, 0-9, +, /), 3 bytes -&gt; 4 characters. Used anywhere binary must travel as text.</p>
-<p><b>How the Signature maps into it:</b> Pack the 144 Signature bits into 18 bytes, then Base64-encode them. The result is a 24-character text token that carries the entire Signature grid losslessly.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the 144-bit Signature string and pad to a multiple of 8 bits (already is: 18 bytes).</li><li>2. Convert each 3-byte group to 4 Base64 characters using the standard alphabet.</li><li>3. The 24-character token is the Base64 form. Decode reverses it exactly.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>bytes of &#x27;SIG&#x27;</code> → Output: <code>Base64 = U0lH</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000004"><button class="btn" data-say="conv:JAH-MATHDATA-000004">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000004">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000004:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000004:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000005" data-id="JAH-MATHDATA-000005" data-search="BCD (Binary-Coded Decimal) Base systems In BCD each decimal digit 0-9 is stored as its own 4-bit nibble (e.g. 9 = 1001). Used in calculators and seven-segment displays. Encode each decimal digit of the Signature&#x27;s canonical measurements separately: apex (4.12, 4.92) becomes digits 4,1,2,4,9,2 -&gt; six nibbles. Digit-exact, no binary rounding.">
-<div class="recid">JAH-MATHDATA-000005 · Base systems</div>
-<h4>BCD (Binary-Coded Decimal)</h4>
-<p><b>The data system:</b> In BCD each decimal digit 0-9 is stored as its own 4-bit nibble (e.g. 9 = 1001). Used in calculators and seven-segment displays.</p>
-<p><b>How the Signature maps into it:</b> Encode each decimal digit of the Signature&#x27;s canonical measurements separately: apex (4.12, 4.92) becomes digits 4,1,2,4,9,2 -&gt; six nibbles. Digit-exact, no binary rounding.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Write the measurement in decimal, e.g. segment length 1.37.</li><li>2. Convert each digit (1,3,7) to a 4-bit nibble: 0001 0011 0111.</li><li>3. Join with spaces. Reverse by reading each nibble as one digit.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>decimal 42</code> → Output: <code>BCD = 0100 0010</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000005"><button class="btn" data-say="conv:JAH-MATHDATA-000005">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000005">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000005:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000005:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000006" data-id="JAH-MATHDATA-000006" data-search="Binary (Base-2) Base systems Base-2 uses digits 0 and 1 only. Every digital system on Earth ultimately reduces to binary. This is the Signature&#x27;s native reduction (Signature-Math-Grid-One): presence of any canonical geometric element = Signature-One = 1; absence/null space = Signature-Zero = 0. Lay the 12x12 grid, test each cell, read the 144-bit string row-major from the top-left origin.">
-<div class="recid">JAH-MATHDATA-000006 · Base systems</div>
-<h4>Binary (Base-2)</h4>
-<p><b>The data system:</b> Base-2 uses digits 0 and 1 only. Every digital system on Earth ultimately reduces to binary.</p>
-<p><b>How the Signature maps into it:</b> This is the Signature&#x27;s native reduction (Signature-Math-Grid-One): presence of any canonical geometric element = Signature-One = 1; absence/null space = Signature-Zero = 0. Lay the 12x12 grid, test each cell, read the 144-bit string row-major from the top-left origin.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Draw the 12x12 Signature Source Math Grid, origin (0,0) top-left.</li><li>2. For each of the 144 cells write 1 if any arc, line, dot, or cross-stroke passes through it, else 0.</li><li>3. Read row by row from the top -&gt; the 144-bit Signature bitstring.</li><li>4. Group into bytes (8 bits) for storage or transmission.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>4x4 sample grid rows 1010/0101/1100/0011</code> → Output: <code>16-bit string: 1010010111000011</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000006"><button class="btn" data-say="conv:JAH-MATHDATA-000006">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000006">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000006:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000006:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000026" data-id="JAH-MATHDATA-000026" data-search="Binary-Hex Bridge Mixes The standard bridge between machine bits and human-readable hex: 4 bits &lt;-&gt; 1 hex digit, lossless both ways. Take the Signature bitstring (record: Binary), group into nibbles, and write hex (record: Hexadecimal). This bridge is how the 144-bit grid becomes the 36-character compact token.">
-<div class="recid">JAH-MATHDATA-000026 · Mixes</div>
-<h4>Binary-Hex Bridge</h4>
-<p><b>The data system:</b> The standard bridge between machine bits and human-readable hex: 4 bits &lt;-&gt; 1 hex digit, lossless both ways.</p>
-<p><b>How the Signature maps into it:</b> Take the Signature bitstring (record: Binary), group into nibbles, and write hex (record: Hexadecimal). This bridge is how the 144-bit grid becomes the 36-character compact token.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Start from the 144-bit Signature string.</li><li>2. Apply the Binary record&#x27;s grouping into 4-bit nibbles.</li><li>3. Apply the Hexadecimal record&#x27;s digit table.</li><li>4. The 36-char hex token decodes back to the exact 144 bits.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>16-bit sample 1010010111000011</code> → Output: <code>hex = A5C3 (grouped in nibbles)</code></p>
-<p class="mixline"><b>Mix of:</b> Binary (Base-2), Hexadecimal (Base-16)</p>
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000026"><button class="btn" data-say="conv:JAH-MATHDATA-000026">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000026">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000026:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000026:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-C"><summary><b>C</b> — 2 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000007" data-id="JAH-MATHDATA-000007" data-search="Color Hex (#RRGGBB) Visual codes Web/digital color as six hex digits: two each for red, green, blue intensity (00-FF). #FF0000 is pure red. Map the Signature&#x27;s pressure-backed rainbow color coding to hex swatches: sample each stroke&#x27;s color (red base, orange apex, yellow tail, blue-violet diagonal, pink tip) and record its #RRGGBB value beside the geometry it colors.">
-<div class="recid">JAH-MATHDATA-000007 · Visual codes</div>
-<h4>Color Hex (#RRGGBB)</h4>
-<p><b>The data system:</b> Web/digital color as six hex digits: two each for red, green, blue intensity (00-FF). #FF0000 is pure red.</p>
-<p><b>How the Signature maps into it:</b> Map the Signature&#x27;s pressure-backed rainbow color coding to hex swatches: sample each stroke&#x27;s color (red base, orange apex, yellow tail, blue-violet diagonal, pink tip) and record its #RRGGBB value beside the geometry it colors.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. List each Signature stroke from Document 1 (Segment 1 arc, Segment 1 line, dot, Segment 2 arc, diagonal, cross-stroke, dots).</li><li>2. Assign the documented color to each stroke (example palette below).</li><li>3. Convert each color to #RRGGBB and store alongside the stroke&#x27;s coordinates.</li><li>4. Any renderer can now repaint the Signature exactly.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>example stroke palette (red, orange, yellow, blue-violet, pink)</code> → Output: <code>#FF0000, #FF8000, #FFFF00, #5B2FD6, #FF7BAC</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000007"><button class="btn" data-say="conv:JAH-MATHDATA-000007">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000007">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000007:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000007:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000027" data-id="JAH-MATHDATA-000027" data-search="Coordinate-to-Pixel Raster Mixes Vector-to-raster conversion: exact coordinates become discrete pixels. The bridge from the Signature&#x27;s native form to image data. Take the canonical coordinate set (record: Geometric Coordinate Sets) and rasterize each stroke onto the 12x12 pixel grid (record: Pixel Grid). Vector in, pixels out — the same pipeline every renderer uses.">
-<div class="recid">JAH-MATHDATA-000027 · Mixes</div>
-<h4>Coordinate-to-Pixel Raster</h4>
-<p><b>The data system:</b> Vector-to-raster conversion: exact coordinates become discrete pixels. The bridge from the Signature&#x27;s native form to image data.</p>
-<p><b>How the Signature maps into it:</b> Take the canonical coordinate set (record: Geometric Coordinate Sets) and rasterize each stroke onto the 12x12 pixel grid (record: Pixel Grid). Vector in, pixels out — the same pipeline every renderer uses.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the canonical coordinates from Document 1.</li><li>2. For each of the 144 pixel cells, test whether any stroke passes through it.</li><li>3. Write 1/0 per cell -&gt; the pixel-grid bitstring.</li><li>4. Compare against the binary record&#x27;s string: they must agree.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>Segment 1 arc start (1.35, 7.73)</code> → Output: <code>lights the pixel cell covering x[1,2), y[7,8)</code></p>
-<p class="mixline"><b>Mix of:</b> Geometric Coordinate Sets, Pixel Grid (Raster)</p>
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000027"><button class="btn" data-say="conv:JAH-MATHDATA-000027">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000027">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000027:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000027:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-D"><summary><b>D</b> — 3 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000008" data-id="JAH-MATHDATA-000008" data-search="DNA-Style Quaternary Base systems DNA uses a 4-letter alphabet (A, C, G, T); each base carries exactly 2 bits of information. Quaternary = base-4. Map Signature bit pairs to bases: 00-&gt;A, 01-&gt;C, 10-&gt;G, 11-&gt;T. The 144-bit Signature becomes a 72-base DNA-style sequence — a bio-inspired archive form of the mark.">
-<div class="recid">JAH-MATHDATA-000008 · Base systems</div>
-<h4>DNA-Style Quaternary</h4>
-<p><b>The data system:</b> DNA uses a 4-letter alphabet (A, C, G, T); each base carries exactly 2 bits of information. Quaternary = base-4.</p>
-<p><b>How the Signature maps into it:</b> Map Signature bit pairs to bases: 00-&gt;A, 01-&gt;C, 10-&gt;G, 11-&gt;T. The 144-bit Signature becomes a 72-base DNA-style sequence — a bio-inspired archive form of the mark.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the 144-bit Signature string.</li><li>2. Split into 2-bit pairs from the left.</li><li>3. Translate each pair: 00=A, 01=C, 10=G, 11=T.</li><li>4. The 72-letter sequence is the DNA-style form. Reverse the table to decode.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>bits 011011</code> → Output: <code>pairs 01|10|11 -&gt; CGT</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000008"><button class="btn" data-say="conv:JAH-MATHDATA-000008">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000008">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000008:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000008:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000009" data-id="JAH-MATHDATA-000009" data-search="Decimal (Base-10) Base systems Base-10, digits 0-9: the everyday human number system. The Signature&#x27;s canonical coordinates are already decimal inches. Signature coordinates are natively decimal (e.g. apex (4.12, 4.92), dot (3.73, 5.10)). Any Signature bitstring also converts to decimal for human readout: value = sum of bit*2^position.">
-<div class="recid">JAH-MATHDATA-000009 · Base systems</div>
-<h4>Decimal (Base-10)</h4>
-<p><b>The data system:</b> Base-10, digits 0-9: the everyday human number system. The Signature&#x27;s canonical coordinates are already decimal inches.</p>
-<p><b>How the Signature maps into it:</b> Signature coordinates are natively decimal (e.g. apex (4.12, 4.92), dot (3.73, 5.10)). Any Signature bitstring also converts to decimal for human readout: value = sum of bit*2^position.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. For coordinates: read them as-is — they are decimal inches on the 12x12 grid.</li><li>2. For a bitstring: number the bits from the right starting at position 0.</li><li>3. Add 2^position for every 1-bit. The total is the decimal value.</li><li>4. Reverse with repeated divide-by-2 to verify.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>binary 1010</code> → Output: <code>decimal = 1*8 + 0*4 + 1*2 + 0 = 10</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000009"><button class="btn" data-say="conv:JAH-MATHDATA-000009">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000009">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000009:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000009:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000028" data-id="JAH-MATHDATA-000028" data-search="DNA-to-Base64 Capsule Mixes Two text-safe encodings chained: quaternary sequence wrapped in Base64 for transport through text-only channels. Convert the Signature bitstring to its DNA-style sequence (record: DNA-Style Quaternary), take the ASCII bytes of that sequence, and Base64-encode them (record: Base64). A bio-flavored capsule carrying the exact bits.">
-<div class="recid">JAH-MATHDATA-000028 · Mixes</div>
-<h4>DNA-to-Base64 Capsule</h4>
-<p><b>The data system:</b> Two text-safe encodings chained: quaternary sequence wrapped in Base64 for transport through text-only channels.</p>
-<p><b>How the Signature maps into it:</b> Convert the Signature bitstring to its DNA-style sequence (record: DNA-Style Quaternary), take the ASCII bytes of that sequence, and Base64-encode them (record: Base64). A bio-flavored capsule carrying the exact bits.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Bits -&gt; DNA sequence via the 00=A,01=C,10=G,11=T table.</li><li>2. Take the sequence&#x27;s ASCII bytes.</li><li>3. Base64-encode those bytes.</li><li>4. Decode Base64, reverse the DNA table -&gt; original bits.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>bits 101001 -&gt; GGC</code> → Output: <code>Base64(&#x27;GGC&#x27;) = R0dD</code></p>
-<p class="mixline"><b>Mix of:</b> DNA-Style Quaternary, Base64</p>
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000028"><button class="btn" data-say="conv:JAH-MATHDATA-000028">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000028">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000028:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000028:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-F"><summary><b>F</b> — 1 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000010" data-id="JAH-MATHDATA-000010" data-search="Floating-Point (IEEE 754) Numeric formats IEEE-754 single precision stores a real number in 32 bits: 1 sign bit, 8 exponent bits, 23 mantissa bits. The standard for scientific computing. Encode Signature measurements (lengths, angles, coordinates) as 32-bit floats for numeric interchange: e.g. the Segment 1 line length 1.37 in becomes its exact 32-bit pattern, reproducible on any machine.">
-<div class="recid">JAH-MATHDATA-000010 · Numeric formats</div>
-<h4>Floating-Point (IEEE 754)</h4>
-<p><b>The data system:</b> IEEE-754 single precision stores a real number in 32 bits: 1 sign bit, 8 exponent bits, 23 mantissa bits. The standard for scientific computing.</p>
-<p><b>How the Signature maps into it:</b> Encode Signature measurements (lengths, angles, coordinates) as 32-bit floats for numeric interchange: e.g. the Segment 1 line length 1.37 in becomes its exact 32-bit pattern, reproducible on any machine.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take a Signature measurement in decimal, e.g. 1.37.</li><li>2. Convert to IEEE-754 single: sign 0 (positive), exponent and mantissa per the standard.</li><li>3. Record the 32-bit pattern and hex. Any IEEE-754 decoder returns 1.37.</li><li>4. Use double (64-bit) when more precision is needed and say which you used.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>1.37 as IEEE-754 single</code> → Output: <code>bits 00111111101011110101110000101001 (0x3FAF5C29)</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000010"><button class="btn" data-say="conv:JAH-MATHDATA-000010">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000010">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000010:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000010:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-G"><summary><b>G</b> — 3 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000011" data-id="JAH-MATHDATA-000011" data-search="Geometric Coordinate Sets Geometry An ordered list of (x, y) coordinate pairs (often as JSON) describing geometry exactly. This is the Signature&#x27;s native data form. This is the source form from Document 1: segment starts, apexes, ends, dot centers, all in inches on the 12x12 grid with origin top-left. Every other conversion on this page derives from these coordinates.">
-<div class="recid">JAH-MATHDATA-000011 · Geometry</div>
-<h4>Geometric Coordinate Sets</h4>
-<p><b>The data system:</b> An ordered list of (x, y) coordinate pairs (often as JSON) describing geometry exactly. This is the Signature&#x27;s native data form.</p>
-<p><b>How the Signature maps into it:</b> This is the source form from Document 1: segment starts, apexes, ends, dot centers, all in inches on the 12x12 grid with origin top-left. Every other conversion on this page derives from these coordinates.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Copy the canonical coordinates from Document 1 (reconstruction order).</li><li>2. Store as JSON: {&quot;segment1_arc&quot;: {&quot;start&quot;: [1.35, 7.73], &quot;apex&quot;: [4.12, 4.92]}, ...}.</li><li>3. Keep 2 decimal places (the documented precision).</li><li>4. Any renderer plots these points to redraw the Signature deterministically.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>Segment 1 arc</code> → Output: <code>{&quot;start&quot;: [1.35, 7.73], &quot;apex&quot;: [4.12, 4.92]}</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000011"><button class="btn" data-say="conv:JAH-MATHDATA-000011">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000011">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000011:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000011:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000012" data-id="JAH-MATHDATA-000012" data-search="Gray Code Base systems Binary reflected Gray code orders values so successive numbers differ in exactly one bit. Used in rotary encoders and error-resistant sensing. Convert the Signature bitstring with g = b XOR (b shifted right 1). Adjacent grid positions then differ by one bit — the grid becomes a Gray-coded position sensor layout.">
-<div class="recid">JAH-MATHDATA-000012 · Base systems</div>
-<h4>Gray Code</h4>
-<p><b>The data system:</b> Binary reflected Gray code orders values so successive numbers differ in exactly one bit. Used in rotary encoders and error-resistant sensing.</p>
-<p><b>How the Signature maps into it:</b> Convert the Signature bitstring with g = b XOR (b shifted right 1). Adjacent grid positions then differ by one bit — the grid becomes a Gray-coded position sensor layout.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the Signature bitstring as an integer b.</li><li>2. Compute g = b XOR (b &gt;&gt; 1), keep the same bit width.</li><li>3. The result is the Gray-coded form. Convert back with the standard inverse loop.</li><li>4. Verify: binary 1011 -&gt; Gray 1110, and back again.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>binary 1011 (decimal 11)</code> → Output: <code>Gray = 1110 (decimal 14)</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000012"><button class="btn" data-say="conv:JAH-MATHDATA-000012">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000012">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000012:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000012:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000029" data-id="JAH-MATHDATA-000029" data-search="Gray-to-Binary Round-Trip Mixes Gray code and back: the self-checking pair. Encoding then decoding must return the exact original — a built-in integrity test. Apply Gray encoding (record: Gray Code) to the Signature bitstring, then immediately decode back to binary (record: Binary). If the round trip is not bit-identical, the implementation has a bug.">
-<div class="recid">JAH-MATHDATA-000029 · Mixes</div>
-<h4>Gray-to-Binary Round-Trip</h4>
-<p><b>The data system:</b> Gray code and back: the self-checking pair. Encoding then decoding must return the exact original — a built-in integrity test.</p>
-<p><b>How the Signature maps into it:</b> Apply Gray encoding (record: Gray Code) to the Signature bitstring, then immediately decode back to binary (record: Binary). If the round trip is not bit-identical, the implementation has a bug.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the Signature bitstring.</li><li>2. Gray-encode: g = b XOR (b &gt;&gt; 1).</li><li>3. Gray-decode with the standard inverse.</li><li>4. Assert decoded == original. Publish the assertion result.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>binary 1011 -&gt; Gray 1110 -&gt; binary</code> → Output: <code>round trip = 1011 (verified identical)</code></p>
-<p class="mixline"><b>Mix of:</b> Gray Code, Binary (Base-2)</p>
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000029"><button class="btn" data-say="conv:JAH-MATHDATA-000029">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000029">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000029:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000029:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-H"><summary><b>H</b> — 2 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000013" data-id="JAH-MATHDATA-000013" data-search="Hash Digest (SHA-256) Cryptography SHA-256 maps any input to a fixed 256-bit (64-hex-character) fingerprint. Changing even one bit of input changes the digest completely. Hash the canonical Signature record — coordinates in the Document 1 reconstruction order, UTF-8 encoded — to fingerprint the geometry. Publish the digest beside the record: anyone can re-hash and verify the mark is unaltered.">
-<div class="recid">JAH-MATHDATA-000013 · Cryptography</div>
-<h4>Hash Digest (SHA-256)</h4>
-<p><b>The data system:</b> SHA-256 maps any input to a fixed 256-bit (64-hex-character) fingerprint. Changing even one bit of input changes the digest completely.</p>
-<p><b>How the Signature maps into it:</b> Hash the canonical Signature record — coordinates in the Document 1 reconstruction order, UTF-8 encoded — to fingerprint the geometry. Publish the digest beside the record: anyone can re-hash and verify the mark is unaltered.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Write the canonical record: coordinates in reconstruction order, 2 decimals, comma-separated, UTF-8.</li><li>2. Run SHA-256 over those exact bytes.</li><li>3. Publish the 64-hex-character digest with the record.</li><li>4. Verifiers re-hash the same bytes and compare digests.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>SHA-256(&quot;SIGNATURE-ONE&quot;)</code> → Output: <code>9c08d5a1e39aaf5f9747c32a6d4335c3552265c814563d20b84a9bdc4981deb4</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000013"><button class="btn" data-say="conv:JAH-MATHDATA-000013">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000013">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000013:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000013:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000014" data-id="JAH-MATHDATA-000014" data-search="Hexadecimal (Base-16) Base systems Base-16 uses digits 0-9 and A-F; each hex digit is exactly 4 bits (one nibble). The compact text form of binary data. Group the 144-bit Signature string into 4-bit nibbles and write each as one hex digit: 144 bits -&gt; 36 hex characters. This is the canonical compact text form of the Signature bitstring.">
-<div class="recid">JAH-MATHDATA-000014 · Base systems</div>
-<h4>Hexadecimal (Base-16)</h4>
-<p><b>The data system:</b> Base-16 uses digits 0-9 and A-F; each hex digit is exactly 4 bits (one nibble). The compact text form of binary data.</p>
-<p><b>How the Signature maps into it:</b> Group the 144-bit Signature string into 4-bit nibbles and write each as one hex digit: 144 bits -&gt; 36 hex characters. This is the canonical compact text form of the Signature bitstring.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the 144-bit Signature string.</li><li>2. Split into 4-bit groups from the left (pad the last group if needed).</li><li>3. Convert each group: 0000=0 ... 1001=9, 1010=A ... 1111=F.</li><li>4. The 36-character hex string is the compact form. Expand nibbles to verify.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>binary 111100001010</code> → Output: <code>hex = F0A</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000014"><button class="btn" data-say="conv:JAH-MATHDATA-000014">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000014">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000014:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000014:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-I"><summary><b>I</b> — 2 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000015" data-id="JAH-MATHDATA-000015" data-search="IPv4 Address Form Numeric formats An IPv4 address is 32 bits written as four decimal octets (e.g. 192.168.1.1). Here it is used purely as an address-FORM demonstration for 32 Signature bits. Pack the first 32 bits of the Signature string into four 8-bit octets and write them dotted-decimal. This demonstrates the address form; it does not claim the Signature is a routable network address.">
-<div class="recid">JAH-MATHDATA-000015 · Numeric formats</div>
-<h4>IPv4 Address Form</h4>
-<p><b>The data system:</b> An IPv4 address is 32 bits written as four decimal octets (e.g. 192.168.1.1). Here it is used purely as an address-FORM demonstration for 32 Signature bits.</p>
-<p><b>How the Signature maps into it:</b> Pack the first 32 bits of the Signature string into four 8-bit octets and write them dotted-decimal. This demonstrates the address form; it does not claim the Signature is a routable network address.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the first 32 bits of the Signature string.</li><li>2. Split into four 8-bit octets.</li><li>3. Convert each octet to decimal 0-255, join with dots.</li><li>4. Label the result &#x27;address form — demonstration only&#x27;.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>octets of 192.168.1.1</code> → Output: <code>binary: 11000000.10101000.00000001.00000001</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000015"><button class="btn" data-say="conv:JAH-MATHDATA-000015">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000015">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000015:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000015:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000016" data-id="JAH-MATHDATA-000016" data-search="IPv6 Address Form Numeric formats IPv6 uses 128 bits written as eight groups of four hex digits (e.g. 2001:0db8::1). Demonstration form for longer Signature bit runs. Extend the Signature bitstring to 128 bits (documented: first 128 bits, no padding games) and write eight hex groups. Demonstration of the 128-bit address form only.">
-<div class="recid">JAH-MATHDATA-000016 · Numeric formats</div>
-<h4>IPv6 Address Form</h4>
-<p><b>The data system:</b> IPv6 uses 128 bits written as eight groups of four hex digits (e.g. 2001:0db8::1). Demonstration form for longer Signature bit runs.</p>
-<p><b>How the Signature maps into it:</b> Extend the Signature bitstring to 128 bits (documented: first 128 bits, no padding games) and write eight hex groups. Demonstration of the 128-bit address form only.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the first 128 bits of the Signature string.</li><li>2. Split into eight 16-bit groups; write each as 4 hex digits.</li><li>3. Join with colons (compress longest zero run with &#x27;::&#x27; per the standard).</li><li>4. Label &#x27;address form — demonstration only&#x27;.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>::1 expanded</code> → Output: <code>0000:0000:0000:0000:0000:0000:0000:0001</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000016"><button class="btn" data-say="conv:JAH-MATHDATA-000016">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000016">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000016:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000016:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-M"><summary><b>M</b> — 3 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000017" data-id="JAH-MATHDATA-000017" data-search="MIDI Note Map Audio MIDI represents musical notes as numbers 0-127; middle C = 60, each +1 is one semitone. A Note-On message is three bytes: status, note, velocity. Map the Signature&#x27;s three dot y-coordinates to MIDI pitches: the grid&#x27;s y-range [4.00, 9.80] maps linearly to MIDI notes 48-72 (two octaves). The dots become a three-note motif; arcs become pitch bends.">
-<div class="recid">JAH-MATHDATA-000017 · Audio</div>
-<h4>MIDI Note Map</h4>
-<p><b>The data system:</b> MIDI represents musical notes as numbers 0-127; middle C = 60, each +1 is one semitone. A Note-On message is three bytes: status, note, velocity.</p>
-<p><b>How the Signature maps into it:</b> Map the Signature&#x27;s three dot y-coordinates to MIDI pitches: the grid&#x27;s y-range [4.00, 9.80] maps linearly to MIDI notes 48-72 (two octaves). The dots become a three-note motif; arcs become pitch bends.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take each dot center&#x27;s y-coordinate from Document 1.</li><li>2. Compute note = round(48 + (9.80 - y) / 5.80 * 24).</li><li>3. Send as MIDI Note-On (0x90), note, velocity 100; Note-Off after one beat.</li><li>4. The three dots play the Signature&#x27;s dot-motif.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>dots at y = 5.10, 4.49, 4.33</code> → Output: <code>MIDI notes = 67, 70, 71 (G4, A#4, B4)</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000017"><button class="btn" data-say="conv:JAH-MATHDATA-000017">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000017">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000017:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000017:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000018" data-id="JAH-MATHDATA-000018" data-search="Morse Code Text encodings Morse encodes letters as dots (.) and dashes (-). &#x27;JAH&#x27; in International Morse is .--- .- .... Two honest mappings: (a) encode the Signature&#x27;s text labels to Morse; (b) read Signature bits directly as Morse symbols, 1 = dah (-), 0 = dit (.).">
-<div class="recid">JAH-MATHDATA-000018 · Text encodings</div>
-<h4>Morse Code</h4>
-<p><b>The data system:</b> Morse encodes letters as dots (.) and dashes (-). &#x27;JAH&#x27; in International Morse is .--- .- ....</p>
-<p><b>How the Signature maps into it:</b> Two honest mappings: (a) encode the Signature&#x27;s text labels to Morse; (b) read Signature bits directly as Morse symbols, 1 = dah (-), 0 = dit (.).</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Choose mapping (a) text labels or (b) raw bits; say which.</li><li>2. For (a): look up each letter in the International Morse table.</li><li>3. For (b): write &#x27;-&#x27; for each 1-bit and &#x27;.&#x27; for each 0-bit.</li><li>4. Separate letters with spaces, words with &#x27; / &#x27;.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>&#x27;JAH&#x27;</code> → Output: <code>Morse: .--- .- ....</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000018"><button class="btn" data-say="conv:JAH-MATHDATA-000018">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000018">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000018:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000018:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000030" data-id="JAH-MATHDATA-000030" data-search="Morse-to-Barcode Chain Mixes Text as rhythm as bars: Morse symbols become physical bar widths. A message you can hear becomes a strip you can see. Convert a label to Morse (record: Morse Code), then map each symbol to bars: dah = wide bar, dit = narrow bar, letter gap = space (record: Barcode). The Signature&#x27;s name becomes a visible bar strip.">
-<div class="recid">JAH-MATHDATA-000030 · Mixes</div>
-<h4>Morse-to-Barcode Chain</h4>
-<p><b>The data system:</b> Text as rhythm as bars: Morse symbols become physical bar widths. A message you can hear becomes a strip you can see.</p>
-<p><b>How the Signature maps into it:</b> Convert a label to Morse (record: Morse Code), then map each symbol to bars: dah = wide bar, dit = narrow bar, letter gap = space (record: Barcode). The Signature&#x27;s name becomes a visible bar strip.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Write the label and convert to Morse.</li><li>2. Map: &#x27;-&#x27; -&gt; wide bar, &#x27;.&#x27; -&gt; narrow bar, gaps -&gt; blank space.</li><li>3. Draw the bars left to right.</li><li>4. Label &#x27;demonstration chain — not a registered symbology&#x27;.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>&#x27;JAH&#x27; -&gt; .--- .- ....</code> → Output: <code>wide/narrow bar strip per symbol</code></p>
-<p class="mixline"><b>Mix of:</b> Morse Code, Barcode (Linear)</p>
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000030"><button class="btn" data-say="conv:JAH-MATHDATA-000030">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000030">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000030:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000030:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-O"><summary><b>O</b> — 1 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000019" data-id="JAH-MATHDATA-000019" data-search="Octal (Base-8) Base systems Base-8 uses digits 0-7; each octal digit is exactly 3 bits. A compact human-readable packing of binary. Group the 144-bit Signature string into 3-bit groups; each group becomes one octal digit: 144 bits -&gt; 48 octal digits. Compact readout, historically used for machine word display.">
-<div class="recid">JAH-MATHDATA-000019 · Base systems</div>
-<h4>Octal (Base-8)</h4>
-<p><b>The data system:</b> Base-8 uses digits 0-7; each octal digit is exactly 3 bits. A compact human-readable packing of binary.</p>
-<p><b>How the Signature maps into it:</b> Group the 144-bit Signature string into 3-bit groups; each group becomes one octal digit: 144 bits -&gt; 48 octal digits. Compact readout, historically used for machine word display.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the 144-bit Signature string.</li><li>2. Split into 3-bit groups from the left.</li><li>3. Convert each group: 000=0 ... 111=7.</li><li>4. The 48-digit string is the octal form. Expand groups to verify.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>binary 101010</code> → Output: <code>octal = 52 (decimal 42)</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000019"><button class="btn" data-say="conv:JAH-MATHDATA-000019">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000019">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000019:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000019:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-P"><summary><b>P</b> — 2 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000020" data-id="JAH-MATHDATA-000020" data-search="Pixel Grid (Raster) Visual codes A raster image is a rectangular grid of pixels, each pixel one color value. A 1-bit monochrome image is one bit per pixel. The 12x12 Signature math grid IS a 144-pixel monochrome image: 1 = inked pixel, 0 = blank. Scale each cell to N×N screen pixels for any display size; the bitstring is the image data.">
-<div class="recid">JAH-MATHDATA-000020 · Visual codes</div>
-<h4>Pixel Grid (Raster)</h4>
-<p><b>The data system:</b> A raster image is a rectangular grid of pixels, each pixel one color value. A 1-bit monochrome image is one bit per pixel.</p>
-<p><b>How the Signature maps into it:</b> The 12x12 Signature math grid IS a 144-pixel monochrome image: 1 = inked pixel, 0 = blank. Scale each cell to N×N screen pixels for any display size; the bitstring is the image data.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the 144-bit Signature string.</li><li>2. Arrange as 12 rows of 12 bits (row-major, top-left origin).</li><li>3. Render each 1-bit as a filled square, each 0-bit as empty.</li><li>4. Scale: multiply every cell by N for an N-times-larger image — geometry preserved.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>5x5 sample rows 00100/01110/11111/01110/00100</code> → Output: <code>25-bit image data: 0010001110111110111000100</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000020"><button class="btn" data-say="conv:JAH-MATHDATA-000020">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000020">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000020:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000020:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000031" data-id="JAH-MATHDATA-000031" data-search="Pixel-to-Color-Hex Mosaic Mixes Structure plus color: the pixel grid says WHERE, the color hex says WHAT COLOR. Together they repaint the Signature exactly. Take the pixel grid (record: Pixel Grid) for geometry and the stroke color table (record: Color Hex), then paint each lit pixel with its stroke&#x27;s hex color. A full-color mosaic reconstruction.">
-<div class="recid">JAH-MATHDATA-000031 · Mixes</div>
-<h4>Pixel-to-Color-Hex Mosaic</h4>
-<p><b>The data system:</b> Structure plus color: the pixel grid says WHERE, the color hex says WHAT COLOR. Together they repaint the Signature exactly.</p>
-<p><b>How the Signature maps into it:</b> Take the pixel grid (record: Pixel Grid) for geometry and the stroke color table (record: Color Hex), then paint each lit pixel with its stroke&#x27;s hex color. A full-color mosaic reconstruction.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Rasterize the Signature to the 12x12 pixel grid.</li><li>2. Look up each lit pixel&#x27;s stroke in the color table.</li><li>3. Fill the pixel with that stroke&#x27;s #RRGGBB.</li><li>4. The mosaic matches the Document 1 color description.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>lit pixel on Segment 1 arc</code> → Output: <code>filled #FF0000 (red base, example palette)</code></p>
-<p class="mixline"><b>Mix of:</b> Pixel Grid (Raster), Color Hex (#RRGGBB)</p>
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000031"><button class="btn" data-say="conv:JAH-MATHDATA-000031">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000031">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000031:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000031:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-Q"><summary><b>Q</b> — 1 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000021" data-id="JAH-MATHDATA-000021" data-search="QR-Style Matrix Pattern Visual codes QR codes are 2D matrices of dark/light modules with finder patterns in three corners. This record demonstrates the matrix-pattern idea; it does not generate scannable QR codes. Lay the 144 Signature bits into a 12x12 module matrix (the math grid itself, at module scale). Reserve the three corner 3x3 zones as finder-style anchors. An honest pattern demonstration of 2D bit layout — labeled as such.">
-<div class="recid">JAH-MATHDATA-000021 · Visual codes</div>
-<h4>QR-Style Matrix Pattern</h4>
-<p><b>The data system:</b> QR codes are 2D matrices of dark/light modules with finder patterns in three corners. This record demonstrates the matrix-pattern idea; it does not generate scannable QR codes.</p>
-<p><b>How the Signature maps into it:</b> Lay the 144 Signature bits into a 12x12 module matrix (the math grid itself, at module scale). Reserve the three corner 3x3 zones as finder-style anchors. An honest pattern demonstration of 2D bit layout — labeled as such.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the 144-bit Signature string as 12 rows of 12.</li><li>2. Draw each bit as one square module: dark for 1, light for 0.</li><li>3. Mark the three corner 3x3 zones as finder-style anchors.</li><li>4. Label &#x27;matrix-pattern demonstration — not a scannable QR code&#x27;.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>12x12 Signature bit matrix</code> → Output: <code>144 modules + 3 finder-style corner anchors</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000021"><button class="btn" data-say="conv:JAH-MATHDATA-000021">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000021">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000021:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000021:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-R"><summary><b>R</b> — 1 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000022" data-id="JAH-MATHDATA-000022" data-search="Run-Length Encoding (RLE) Compression RLE compresses data by replacing runs of identical values with (count, value) pairs: &#x27;AAABBC&#x27; -&gt; &#x27;3A&#x27;,&#x27;2B&#x27;,&#x27;1C&#x27;. Compress the Signature bitstring&#x27;s runs. The grid is mostly null space, so long zero-runs collapse dramatically — this is the honest reason the Signature archives so small.">
-<div class="recid">JAH-MATHDATA-000022 · Compression</div>
-<h4>Run-Length Encoding (RLE)</h4>
-<p><b>The data system:</b> RLE compresses data by replacing runs of identical values with (count, value) pairs: &#x27;AAABBC&#x27; -&gt; &#x27;3A&#x27;,&#x27;2B&#x27;,&#x27;1C&#x27;.</p>
-<p><b>How the Signature maps into it:</b> Compress the Signature bitstring&#x27;s runs. The grid is mostly null space, so long zero-runs collapse dramatically — this is the honest reason the Signature archives so small.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Take the 144-bit Signature string.</li><li>2. Scan left to right; count each run of identical bits.</li><li>3. Write each run as count + bit (e.g. 5 ones -&gt; &#x27;5x1&#x27;).</li><li>4. Decode by expanding each run. Verify round-trip equality.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>bits &#x27;AAABBC&#x27;</code> → Output: <code>RLE = 3A2B1C</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000022"><button class="btn" data-say="conv:JAH-MATHDATA-000022">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000022">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000022:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000022:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-T"><summary><b>T</b> — 2 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000023" data-id="JAH-MATHDATA-000023" data-search="Ternary (Base-3) Base systems Base-3 uses digits 0, 1, 2. Each trit carries log2(3) ~ 1.585 bits of information. Classify each grid cell three ways: 1 = stroke present, 0 = null space, 2 = crossing point (where two elements intersect, e.g. cross-stroke over the diagonal). Read the 144 trits row-major — the Signature&#x27;s three-state reduction.">
-<div class="recid">JAH-MATHDATA-000023 · Base systems</div>
-<h4>Ternary (Base-3)</h4>
-<p><b>The data system:</b> Base-3 uses digits 0, 1, 2. Each trit carries log2(3) ~ 1.585 bits of information.</p>
-<p><b>How the Signature maps into it:</b> Classify each grid cell three ways: 1 = stroke present, 0 = null space, 2 = crossing point (where two elements intersect, e.g. cross-stroke over the diagonal). Read the 144 trits row-major — the Signature&#x27;s three-state reduction.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Lay the 12x12 grid.</li><li>2. Mark each cell: 2 if two Signature elements cross inside it, 1 if one passes through, else 0.</li><li>3. Read row-major -&gt; 144-trit string.</li><li>4. Convert groups to decimal to verify (positional base-3).</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>trits &#x27;102&#x27; as a number</code> → Output: <code>1*9 + 0*3 + 2 = 11</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000023"><button class="btn" data-say="conv:JAH-MATHDATA-000023">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000023">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000023:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000023:json">⬇ .json</button></div></div>
-<div class="conv-card" id="JAH-MATHDATA-000032" data-id="JAH-MATHDATA-000032" data-search="Ternary-to-Octal Packing Mixes Base-3 trits packed into base-8 digits: a compactness bridge between the three-state and eight-state reductions. Take the ternary cell classification (record: Ternary), group trits, convert through decimal to octal digits (record: Octal). Demonstrates base conversion between non-binary systems.">
-<div class="recid">JAH-MATHDATA-000032 · Mixes</div>
-<h4>Ternary-to-Octal Packing</h4>
-<p><b>The data system:</b> Base-3 trits packed into base-8 digits: a compactness bridge between the three-state and eight-state reductions.</p>
-<p><b>How the Signature maps into it:</b> Take the ternary cell classification (record: Ternary), group trits, convert through decimal to octal digits (record: Octal). Demonstrates base conversion between non-binary systems.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Classify grid cells as trits (0/1/2).</li><li>2. Convert trit groups to decimal values.</li><li>3. Write each value in octal.</li><li>4. Reverse the chain to verify.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>trits &#x27;102&#x27; = decimal 11</code> → Output: <code>octal = 13 (1*8 + 3)</code></p>
-<p class="mixline"><b>Mix of:</b> Ternary (Base-3), Octal (Base-8)</p>
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000032"><button class="btn" data-say="conv:JAH-MATHDATA-000032">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000032">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000032:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000032:json">⬇ .json</button></div></div>
-</details>
-<details class="az" id="az-U"><summary><b>U</b> — 1 conversion record(s)</summary>
-<div class="conv-card" id="JAH-MATHDATA-000024" data-id="JAH-MATHDATA-000024" data-search="Unicode (UTF-8) Text encodings Unicode assigns every character a code point (U+0000 and up); UTF-8 encodes code points as 1-4 bytes. The universal text standard. Encode the Signature&#x27;s labels, metadata, and annotations as UTF-8 so the math records travel in any script: Greek letters for angles (e.g. Σ), inch marks, and the full record text.">
-<div class="recid">JAH-MATHDATA-000024 · Text encodings</div>
-<h4>Unicode (UTF-8)</h4>
-<p><b>The data system:</b> Unicode assigns every character a code point (U+0000 and up); UTF-8 encodes code points as 1-4 bytes. The universal text standard.</p>
-<p><b>How the Signature maps into it:</b> Encode the Signature&#x27;s labels, metadata, and annotations as UTF-8 so the math records travel in any script: Greek letters for angles (e.g. Σ), inch marks, and the full record text.</p>
-<div class="howto"><b>HOW TO APPLY — locked in:</b><ol><li>1. Write the label/record text (any script).</li><li>2. Look up each character&#x27;s code point (e.g. Σ = U+03A3).</li><li>3. Encode to UTF-8 bytes per the standard.</li><li>4. Decode reverses exactly — text survives any system.</li></ol></div>
-<p class="worked"><b>Worked example.</b> Input: <code>character &#x27;Σ&#x27; (U+03A3)</code> → Output: <code>UTF-8 bytes = CEA3</code></p>
-
-<div class="toolbar" role="toolbar" aria-label="Tools for JAH-MATHDATA-000024"><button class="btn" data-say="conv:JAH-MATHDATA-000024">🔊 Read aloud</button> <button class="btn" data-copy="conv:JAH-MATHDATA-000024">⧉ Copy</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000024:txt">⬇ .txt</button> <button class="btn" data-dl="conv:JAH-MATHDATA-000024:json">⬇ .json</button></div></div>
-</details></div>
   </section>
 
   <section class="block" aria-labelledby="dkh">
@@ -1259,7 +953,7 @@ document.addEventListener("click",function(e){
 });
 $("rdstop").onclick=rdStop;
 /* ---------- search (results panel) ---------- */
-function clearSearches(){$("q").value="";$("cq2").value="";doSearch("");}
+function clearSearches(){$("q").value="";var c2=$("cq2");if(c2)c2.value="";doSearch("");}
 function convCountLine(html){var el=$("convcountline");if(el)el.innerHTML=html}
 var CONV_TOTAL=document.querySelectorAll(".conv-card").length;
 function doSearch(q){
@@ -1292,7 +986,7 @@ function doSearch(q){
  var qc2=$("qclear2");if(qc2)qc2.onclick=clearSearches}
 $("qgo").onclick=function(){doSearch($("q").value)};
 $("q").addEventListener("keydown",function(e){if(e.key==="Enter")doSearch($("q").value)});
-$("cq2").addEventListener("input",function(){doSearch($("cq2").value)});
+if($("cq2"))$("cq2").addEventListener("input",function(){doSearch($("cq2").value)});
 /* ---------- ask (deterministic, grounded) ---------- */
 var STOP=new Set("the,a,an,and,or,for,to,of,in,on,with,is,it,this,that,what,does,which,how,are,be,was,were,at,by,from,as,so,but,if,not,no,yes,up,out,about,into,over,after,than,then,there,their,them,they,me,my,i,you,your,we,our,do,does,want,need,needs,looking,look,find,finds,get,something,anything,some,any,please,like,just,really,very,would,could,should,can,will,have,has,show,tell,give,kind,thing,things,describe,explain,meaning,mean".split(","));
 function kws(t){return String(t||"").toLowerCase().replace(/[^a-z0-9 ]/g," ").split(/\s+/).filter(function(w){return w.length>=3&&!STOP.has(w)})}
