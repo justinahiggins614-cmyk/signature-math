@@ -66,6 +66,19 @@ details.rec>summary{padding:10px 12px;font-size:15px}
 .toolbar{margin:10px 0;display:flex;flex-wrap:wrap;gap:8px}
 .docrow{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:var(--card);padding:14px 16px}
 .docrow .doctitle{font-weight:700;font-size:16px;margin:0 0 4px}
+/* BEST OF THE BEST — Manon's 2026-10-04 archive pattern: the AI's top pick pinned above the A–Z list */
+.bestofbest{border:2px solid var(--gold);border-radius:14px;background:linear-gradient(180deg,rgba(255,211,77,.08),rgba(255,211,77,.02));padding:18px;margin:26px 0}
+.bestofbest h2{margin:0 0 4px;color:var(--gold)}
+.bestofbest .whybest{font-size:14px;color:var(--ink);background:rgba(255,211,77,.1);border-left:3px solid var(--gold);padding:8px 12px;border-radius:0 8px 8px 0;margin:10px 0}
+.bestofbest .beststats{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.bestofbest .beststat{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:13px}
+.bestofbest .beststat b{color:var(--gold)}
+.bestflow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:14px 0;justify-content:center}
+.bestflow .bnode{background:var(--bg2);border:1px solid var(--gold);border-radius:10px;padding:10px 14px;text-align:center;font-size:13px;max-width:170px}
+.bestflow .bnode b{display:block;color:var(--gold);margin-bottom:4px}
+.bestflow .barrow{color:var(--gold);font-size:20px;font-weight:700}
+.bestofbest .recbody{padding:4px 4px 4px}
+#bestbody .toolbar{margin-top:14px}
 .stamp{font-size:12px;color:var(--dim)}
 .countpill{background:var(--gold);color:#000;font-weight:700;border-radius:12px;padding:2px 14px;font-size:15px}
 #jahThemeBtn{position:fixed;top:10px;right:10px;z-index:60;background:#1b2650;color:var(--ink);border:1px solid var(--line);border-radius:50%;width:40px;height:40px;cursor:pointer;font-size:18px}
@@ -268,10 +281,16 @@ document.getElementById("jah-askai-q").addEventListener("keydown",function(e){if
     </div>
   </section>
 
+  <section class="block bestofbest" aria-labelledby="besth">
+    <h2 id="besth">★ Best of the Best</h2>
+    <p class="stamp">The AI's top pick from this archive — the single record that best shows what this site does. Tap the card to pop it open.</p>
+    <div id="bestbody"><p>Picking the best record…</p></div>
+  </section>
+
   <section class="block" aria-labelledby="azh">
     <h2 id="azh">Data Systems Conversions — A&ndash;Z</h2>
     <p class="stamp">The catalog index loads first (a few KB). Each record's full detail is fetched only when you open it — light on your phone.</p>
-    <div id="jah-askai-scope"><p>Loading the catalog…</p></div>
+    <div id="azlist"><p>Loading the catalog…</p></div>
   </section>
 </main>
 <footer>
@@ -372,6 +391,90 @@ function init(){
   });
 }
 init();
+})();
+</script>
+<script>
+/* BEST OF THE BEST — Manon's 2026-10-04 archive pattern. The AI picks the single most
+   complete conversion record (most application steps + fullest mapping) and renders it
+   expanded: what it does, implications, stats, copy/download/audio. Additive only. */
+(function(){
+"use strict";
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]});}
+function fetchJson(u){return fetch(u,{cache:"no-store"}).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();});}
+var host=document.getElementById("bestbody");if(!host)return;
+function copyText(t,btn){
+  function done(ok){var o=btn.textContent;btn.textContent=ok?"Copied ✓":"Copy failed";setTimeout(function(){btn.textContent=o;},1500);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){done(true);},function(){done(false);});}
+  else{var ta=document.createElement("textarea");ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand("copy");done(true);}catch(e){done(false);}document.body.removeChild(ta);}
+}
+function download(name,text){
+  try{var url=URL.createObjectURL(new Blob([text],{type:"text/plain"}));var a=document.createElement("a");a.href=url;a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);try{URL.revokeObjectURL(url);}catch(e){}},800);}catch(e){}
+}
+var speakTimer=null;
+function speakStop(){try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}if(speakTimer){clearTimeout(speakTimer);speakTimer=null;}}
+function speak(t,btn){
+  speakStop();
+  var label=btn?btn.innerHTML:"";
+  function reset(){if(btn)btn.innerHTML=label;speakStop();}
+  try{
+    if(!("speechSynthesis" in window)||!t){if(btn)btn.textContent="No voice on this device";setTimeout(reset,1800);return;}
+    var u=new SpeechSynthesisUtterance(String(t).slice(0,1500));
+    if(btn)btn.textContent="⏹ Stop";
+    u.onend=reset;u.onerror=reset;
+    window.speechSynthesis.speak(u);
+    speakTimer=setTimeout(reset,25000);
+    if(btn)btn.onclick=function(){reset();if(btn)btn.onclick=function(){speak(t,btn);};};
+  }catch(e){reset();}
+}
+function pickBest(recs,fullById){
+  var best=null,bestScore=-1;
+  for(var i=0;i<recs.length;i++){
+    var f=fullById[recs[i].id];if(!f)continue;
+    var score=((f.apply&&f.apply.length)||0)*10+String(f.mapping||"").length+String(f.ex_in||"").length;
+    if(score>bestScore){bestScore=score;best={idx:recs[i],full:f};}
+  }
+  return best;
+}
+function render(best,total){
+  var rec=best.idx,r=best.full;
+  var plain="Best of the Best — "+rec.name+" ("+rec.id+"). "+r.system+" How it maps: "+r.mapping;
+  var h="<details class=\"az rec\" open>";
+  h+="<summary><span class=\"recname\">★ "+esc(rec.name)+"</span><span class=\"reccat\">"+esc(rec.cat)+"</span><br><span class=\"recid\">"+esc(rec.id)+"</span></summary>";
+  h+="<div class=\"recbody\">";
+  h+="<p class=\"whybest\"><b>Why this is the best:</b> the most complete conversion record in the archive — a full mapping, "+((r.apply&&r.apply.length)||0)+" application steps, and a worked example. It shows what Signature Math actually does: turn the Signature mark into a real working system.</p>";
+  h+="<div class=\"bestflow\" aria-hidden=\"true\">"
+    +"<div class=\"bnode\"><b>144-bit grid</b>the Signature mark</div><div class=\"barrow\">→</div>"
+    +"<div class=\"bnode\"><b>144 samples</b>1→+16000, 0→−16000</div><div class=\"barrow\">→</div>"
+    +"<div class=\"bnode\"><b>.wav file</b>8000 Hz + header</div><div class=\"barrow\">→</div>"
+    +"<div class=\"bnode\"><b>You hear it</b>the SG1 ping</div></div>";
+  h+="<p><b>What it does:</b> "+esc(r.system)+"</p>";
+  h+="<p><b>Implications — how the Signature maps in:</b> "+esc(r.mapping)+"</p>";
+  if(r.apply&&r.apply.length){h+="<p><b>How to use it:</b></p><ol>";for(var i=0;i<r.apply.length;i++)h+="<li>"+esc(r.apply[i])+"</li>";h+="</ol>";}
+  h+="<div class=\"worked\"><b>Worked example</b><br>in: <code>"+esc(r.ex_in)+"</code><br>out: <code>"+esc(r.ex_out)+"</code></div>";
+  h+="<div class=\"beststats\">"
+    +"<span class=\"beststat\"><b>"+total+"</b> records in archive</span>"
+    +"<span class=\"beststat\">Category: <b>"+esc(rec.cat)+"</b></span>"
+    +"<span class=\"beststat\"><b>"+((r.apply&&r.apply.length)||0)+"</b> application steps</span>"
+    +"<span class=\"beststat\">Worked example: <b>included</b></span></div>";
+  var dl=r.name+"\n"+r.id+"\n\nWHAT IT DOES\n"+r.system+"\n\nIMPLICATIONS\n"+r.mapping+"\n\nHOW TO USE\n"+(r.apply||[]).join("\n")+"\n\nWORKED EXAMPLE\nin: "+r.ex_in+"\nout: "+r.ex_out;
+  h+="<div class=\"toolbar\">"
+    +"<button class=\"btn\" id=\"best-speak\">🔊 Read aloud</button>"
+    +"<button class=\"btn\" id=\"best-copy\">⧉ Copy</button>"
+    +"<button class=\"btn\" id=\"best-dl\">⤓ Download</button>"
+    +"<a class=\"btn\" href=\"index.html?conv="+esc(rec.id)+"\">Open full record →</a></div>";
+  h+="</div></details>";
+  host.innerHTML=h;
+  document.getElementById("best-speak").onclick=function(){speak(plain,this);};
+  document.getElementById("best-copy").onclick=function(){copyText(dl,this);};
+  document.getElementById("best-dl").onclick=function(){download(rec.id+"-best.txt",dl);};
+}
+Promise.all([fetchJson("data/browse_index.json"),fetchJson("data/mathdata.json")]).then(function(res){
+  var recs=res[0].records||[],arr=res[1],m={};
+  for(var i=0;i<arr.length;i++)m[arr[i].id]=arr[i];
+  var best=pickBest(recs,m);
+  if(!best){host.innerHTML="<p>The best pick is unavailable right now — browse the A–Z list below.</p>";return;}
+  render(best,res[0].total||recs.length);
+}).catch(function(){host.innerHTML="<p>Could not load the best pick — browse the A–Z list below.</p>";});
 })();
 </script>
 </body>
