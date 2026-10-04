@@ -7,6 +7,7 @@
  "counts": {
   "math_records": 4,
   "conversion_records": 32,
+  "total_records": 36,
   "conversion_target": 1000000,
   "measuring_tools": 6,
   "grid_inches": 12,
