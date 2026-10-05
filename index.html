@@ -13,7 +13,10 @@
 <meta property="og:image" content="https://justinahiggins614-cmyk.github.io/signature-math/assets/logo.jpg">
 <meta property="og:image:alt" content="Official Signature Math logo: the rainbow Signature mark on the black 12 by 12 math grid">
 <meta name="twitter:card" content="summary">
-<script>try{if(localStorage.getItem("jah-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<script src="js/signin.js"></script>
+<script>/* profile-aware storage wrapper: signed out = plain localStorage (unchanged); signed in = per-profile namespace */
+var PS=(typeof JAHProfile!=="undefined"&&JAHProfile)?JAHProfile.store:{get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}},remove:function(k){try{localStorage.removeItem(k)}catch(e){}}};</script>
+<script>try{if(PS.get("jah-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Signature Math",
  "url":"https://justinahiggins614-cmyk.github.io/signature-math/",
@@ -1055,15 +1058,15 @@ $("bintoggle").onclick=function(){var on=this.getAttribute("aria-pressed")==="tr
    setTimeout(function(){el2.scrollIntoView({block:"center"})},400)}}})();
 </script>
 <script>(function(){try{var b=$("jahThemeBtn");function paint(){b.textContent=document.documentElement.dataset.theme==="dark"?"◑":"◐"}
-b.onclick=function(){var d=document.documentElement;if(d.dataset.theme==="dark"){d.dataset.theme="";try{localStorage.removeItem("jah-theme")}catch(e){}}else{d.dataset.theme="dark";try{localStorage.setItem("jah-theme","dark")}catch(e){}}paint()};paint()}catch(e){}})();</script>
-<script>/* session restore: scroll + last-viewed record, localStorage only */
+b.onclick=function(){var d=document.documentElement;if(d.dataset.theme==="dark"){d.dataset.theme="";try{PS.remove("jah-theme")}catch(e){}}else{d.dataset.theme="dark";try{PS.set("jah-theme","dark")}catch(e){}}paint()};paint()}catch(e){}})();</script>
+<script>/* session restore: scroll + last-viewed record (profile-aware via PS) */
 (function(){try{var SITE="sigmath",SK="jah-scroll-"+SITE;
-var st=null;window.addEventListener("scroll",function(){clearTimeout(st);st=setTimeout(function(){try{localStorage.setItem(SK,String(window.scrollY))}catch(e){}},400)},{passive:true});
+var st=null;window.addEventListener("scroll",function(){clearTimeout(st);st=setTimeout(function(){try{PS.set(SK,String(window.scrollY))}catch(e){}},400)},{passive:true});
 var q=new URLSearchParams(location.search);
-if(!q.get("doc")&&!q.get("conv")){var sv=null;try{sv=localStorage.getItem(SK)}catch(e){}
+if(!q.get("doc")&&!q.get("conv")){var sv=null;try{sv=PS.get(SK)}catch(e){}
  if(sv&&+sv>40)requestAnimationFrame(function(){window.scrollTo(0,+sv)})}
 document.addEventListener("click",function(e){var t=e.target&&e.target.closest?e.target.closest("[data-id]"):null;
- if(t)try{localStorage.setItem("jah-last-"+SITE,t.getAttribute("data-id"))}catch(x){}},true)}catch(e){}})();</script>
+ if(t)try{PS.set("jah-last-"+SITE,t.getAttribute("data-id"))}catch(x){}},true)}catch(e){}})();</script>
 <script>/* usability boot: counts from api.json (with timeout+retry), scrollspy "you are here", TOC init */
 (function(){
  "use strict";
@@ -1109,7 +1112,7 @@ document.addEventListener("click",function(e){var t=e.target&&e.target.closest?e
 /* ---------- first-visit WELCOME overlay (2026-10-04 standard): centered modal.
    NO auto-scroll, NO spotlight, NO section jumps — the page stays put, the overlay teaches. ---------- */
 var FLAG="jah-tour-seen-math";
-function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+function ls(k,v){try{if(v===undefined)return PS.get(k);PS.set(k,v)}catch(e){return null}}
 var w=document.getElementById("jahWelcome"),
     guide=document.getElementById("jahGuide"),
     guideCard=document.getElementById("jahGuideCard"),
@@ -1179,5 +1182,15 @@ if(!ls(FLAG)){setTimeout(openWelcome,900)}
     </div>
   </div>
 </div>
+<script>
+(function () {
+  var mount = document.querySelector("header .booksearch") ||
+              document.querySelector("nav.jtabbar") ||
+              document.querySelector("header nav") ||
+              document.querySelector("header") ||
+              document.body;
+  if (window.JAHProfile && JAHProfile.ui) JAHProfile.ui.renderButton(mount);
+})();
+</script>
 </body>
 </html>

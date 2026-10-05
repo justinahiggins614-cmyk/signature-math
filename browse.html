@@ -12,7 +12,10 @@
 <meta property="og:url" content="https://justinahiggins614-cmyk.github.io/signature-math/browse.html">
 <meta property="og:image" content="https://justinahiggins614-cmyk.github.io/signature-math/assets/logo.jpg">
 <meta name="twitter:card" content="summary">
-<script>try{if(localStorage.getItem("jah-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<script src="js/signin.js"></script>
+<script>/* profile-aware storage wrapper: signed out = plain localStorage (unchanged); signed in = per-profile namespace */
+var PS=(typeof JAHProfile!=="undefined"&&JAHProfile)?JAHProfile.store:{get:function(k){try{return localStorage.getItem(k)}catch(e){return null}},set:function(k,v){try{localStorage.setItem(k,v)}catch(e){}},remove:function(k){try{localStorage.removeItem(k)}catch(e){}}};</script>
+<script>try{if(PS.get("jah-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage","name":"Signature Math — Full Record Catalog",
  "url":"https://justinahiggins614-cmyk.github.io/signature-math/browse.html",
@@ -299,7 +302,7 @@ document.getElementById("jah-askai-q").addEventListener("keydown",function(e){if
 </footer>
 <script>
 /* theme toggle (same as index.html) */
-(function(){try{var b=document.getElementById("jahThemeBtn");function paint(){b.innerHTML=document.documentElement.dataset.theme==="dark"?"&#9680;":"&#9681;"}b.onclick=function(){var d=document.documentElement;if(d.dataset.theme==="dark"){d.dataset.theme="";try{localStorage.removeItem("jah-theme")}catch(e){}}else{d.dataset.theme="dark";try{localStorage.setItem("jah-theme","dark")}catch(e){}}paint()};paint()}catch(e){}})();
+(function(){try{var b=document.getElementById("jahThemeBtn");function paint(){b.innerHTML=document.documentElement.dataset.theme==="dark"?"&#9680;":"&#9681;"}b.onclick=function(){var d=document.documentElement;if(d.dataset.theme==="dark"){d.dataset.theme="";try{PS.remove("jah-theme")}catch(e){}}else{d.dataset.theme="dark";try{PS.set("jah-theme","dark")}catch(e){}}paint()};paint()}catch(e){}})();
 </script>
 <script>
 /* full-record catalog: lazy A-Z, search, lazy record details (phone-light) */
@@ -475,6 +478,16 @@ Promise.all([fetchJson("data/browse_index.json"),fetchJson("data/mathdata.json")
   if(!best){host.innerHTML="<p>The best pick is unavailable right now — browse the A–Z list below.</p>";return;}
   render(best,res[0].total||recs.length);
 }).catch(function(){host.innerHTML="<p>Could not load the best pick — browse the A–Z list below.</p>";});
+})();
+</script>
+<script>
+(function () {
+  var mount = document.querySelector("header .booksearch") ||
+              document.querySelector("nav.jtabbar") ||
+              document.querySelector("header nav") ||
+              document.querySelector("header") ||
+              document.body;
+  if (window.JAHProfile && JAHProfile.ui) JAHProfile.ui.renderButton(mount);
 })();
 </script>
 </body>
