@@ -1007,7 +1007,7 @@ function ask(q,idx,ansEl,linkFn){
 $("aqgo").onclick=function(){ask($("aq").value,POSTS_IDX,"aqans",function(r){
  return '<a href="?doc='+r.id+'">Open the record →</a>'})};
 $("aq").addEventListener("keydown",function(e){if(e.key==="Enter")$("aqgo").click()});
-var CONV_IDX=CONV_FULL.map(function(r){return{id:r.id,name:r.name,text:r.system+" "+r.mapping+" "+" ".join(r.apply)}});
+var CONV_IDX=CONV_FULL.map(function(r){return{id:r.id,name:r.name,text:r.system+" "+r.mapping+" "+r.apply.join(" ")}});
 $("cqgo").onclick=function(){ask($("cq").value,CONV_IDX,"cqans",function(r){
  return '<a href="?conv='+r.id+'">Open the conversion record →</a>'})};
 $("cq").addEventListener("keydown",function(e){if(e.key==="Enter")$("cqgo").click()});
