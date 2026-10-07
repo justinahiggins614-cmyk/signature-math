@@ -877,8 +877,8 @@ function exportStamp(){return new Date().toISOString().slice(0,10)}
 function djb2(s){var h=5381;for(var i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))>>>0;return("00000000"+h.toString(16)).slice(-8)}
 function recordText(kind,id){
  var body="";
- if(kind==="post"||kind==="conv"){var el=document.getElementById(id);body=el?el.innerText:""}
- else if(kind==="bitstring"){body=$("bitstring").innerText}
+ if(kind==="post"||kind==="conv"){var el=document.getElementById(id);body=el?((el.innerText!==undefined&&el.innerText!==null)?el.innerText:(el.textContent||"")):""}
+ else if(kind==="bitstring"){var bb=$("bitstring");body=bb?((bb.innerText!==undefined&&bb.innerText!==null)?bb.innerText:(bb.textContent||"")):""}
  return "SIGNATURE MATH EXPORT\nID: "+id+"\nKind: "+kind+"\nVersion: 1.0\nExported: "+exportStamp()+"\nEncoding: UTF-8\nChecksum (djb2): "+djb2(body)+"\n----\n"+body}
 function recordJSON(kind,id){
  var o=null;
